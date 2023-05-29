@@ -5,6 +5,15 @@ import 'package:flutter/material.dart';
 class AppTextStyle {
   AppTextStyle._();
 
+  static const TextStyle F18_NORMAL = TextStyle(
+    fontSize: 18,
+  );
+
+  static const TextStyle F18_BOLD = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle F20_NORMAL = TextStyle(
     fontSize: 20,
   );

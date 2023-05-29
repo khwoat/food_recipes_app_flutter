@@ -3,6 +3,7 @@ import 'package:food_recipes_flutter/constants/button_style.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
+import 'package:food_recipes_flutter/route.dart';
 
 import '../widgets/app_card.dart';
 
@@ -26,7 +27,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                AppString.APP_NAME,
+                AppString.APP_NAME_NEW_LINE,
                 textAlign: TextAlign.center,
                 style: AppTextStyle.F28_BOLD.copyWith(
                   color: AppColors.ORANGE_FE7455,
@@ -89,7 +90,10 @@ class LoginPage extends StatelessWidget {
             context,
             label: AppString.LOGIN_BTN,
             buttonStyle: AppButtonStyle.ORANGE_BTN,
-            onTap: () {},
+            onTap: () => Navigator.popAndPushNamed(
+              context,
+              AppRoute.DASHBOARD_PAGE,
+            ),
           ),
         ],
       ),
@@ -150,7 +154,7 @@ class LoginPage extends StatelessWidget {
           onTap: () {},
         ),
 
-        const SizedBox(height: 15),
+        const SizedBox(height: 10),
 
         // Google btn
         _getButton(
@@ -173,7 +177,7 @@ class LoginPage extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
 
         // Register text btn
         InkWell(

@@ -13,21 +13,17 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(milliseconds: 3000)).then(
-      (value) => Navigator.pushNamed(context, AppRoute.LOGIN_PAGE),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 3000)).then(
+      (value) => Navigator.popAndPushNamed(context, AppRoute.LOGIN_PAGE),
+    );
+
     return Scaffold(
       body: Container(
         color: AppColors.ORANGE_FE7455,
         child: Center(
           child: Text(
-            AppString.APP_NAME,
+            AppString.APP_NAME_NEW_LINE,
             style: AppTextStyle.F28_BOLD.copyWith(
               color: AppColors.WHITE,
             ),
