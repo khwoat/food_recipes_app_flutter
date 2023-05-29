@@ -2,7 +2,7 @@ class Recipe {
   late String _recipeName;
   late String _username;
   late List<RecipeDetail> _detailList;
-  late List<String> _imageList;
+  late List<String?> _imageList;
 
   Recipe({
     required String recipeName,
@@ -17,7 +17,7 @@ class Recipe {
   String get recipeName => _recipeName;
   String get username => _username;
   List<RecipeDetail> get detailList => _detailList;
-  List<String> get imageList => _imageList;
+  List<String?> get imageList => _imageList;
 
   Recipe.fromJson(dynamic json) {
     _recipeName = json["recipeName"];

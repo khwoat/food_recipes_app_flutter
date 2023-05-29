@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
-import 'package:food_recipes_flutter/cubit/recipes/recipes_cubit.dart';
 import 'package:food_recipes_flutter/cubit/sort_dropdown/sort_dropdown_cubit.dart';
-import 'package:food_recipes_flutter/widgets/app_card.dart';
+import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 
 import '../cubit/cate_dropdown/cate_dropdown_cubit.dart';
-import '../model/recipe.dart';
+import '../cubit/recipe_list/recipe_list_cubit.dart';
+import '../model/recipe_list.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -31,8 +31,8 @@ class _DashboardPageState extends State<DashboardPage> {
       imageList: [],
     ),
     Recipe(
-      recipeName: "Tom yum kung",
-      username: "Josh",
+      recipeName: "Pad Thai",
+      username: "David",
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],
@@ -42,13 +42,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   late final CategoryDropdownCubit _cateDropdownCubit;
   late final SortDropdownCubit _sortDropdownCubit;
-  late final RecipesCubit _recipesCubit;
+  late final RecipeListCubit _recipesCubit;
 
   @override
   void didChangeDependencies() {
     _cateDropdownCubit = BlocProvider.of<CategoryDropdownCubit>(context);
     _sortDropdownCubit = BlocProvider.of<SortDropdownCubit>(context);
-    _recipesCubit = BlocProvider.of<RecipesCubit>(context);
+    _recipesCubit = BlocProvider.of<RecipeListCubit>(context);
     super.didChangeDependencies();
   }
 
@@ -68,10 +68,12 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         backgroundColor: AppColors.ORANGE_FE7455,
         toolbarHeight: 70,
-        leading: IconButton(
-          onPressed: () => Scaffold.of(context).openDrawer(),
-          icon: const Icon(Icons.person),
-        ),
+        leading: Builder(builder: (context) {
+          return IconButton(
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            icon: const Icon(Icons.person),
+          );
+        }),
         centerTitle: true,
         title: Text(
           AppString.APP_NAME,
@@ -121,17 +123,23 @@ class _DashboardPageState extends State<DashboardPage> {
             ],
           ),
 
-          // Recipe list card
+          // Recipe card grid view
           Expanded(
-            child: BlocBuilder<RecipesCubit, RecipesState>(
+            child: BlocBuilder<RecipeListCubit, RecipeListState>(
               builder: (context, state) {
                 return GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
+                    mainAxisExtent: 210,
                   ),
                   itemCount: state.recipeList.length,
-                  itemBuilder: (context, index) =>
-                      _getRecipeItem(context, state.recipeList[index]),
+                  itemBuilder: (context, index) {
+                    final Recipe recipe = state.recipeList[index];
+                    return RecipeCard(
+                      recipeName: recipe.recipeName,
+                      username: recipe.username,
+                    );
+                  },
                 );
               },
             ),
@@ -165,28 +173,6 @@ class _DashboardPageState extends State<DashboardPage> {
           color: AppColors.GREY_DARK,
         ),
       ),
-    );
-  }
-
-  Widget _getRecipeItem(BuildContext context, Recipe recipe) {
-    return AppCard(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(children: [
-        Expanded(
-          child: Text(
-            recipe.recipeName,
-            style: AppTextStyle.F18_BOLD.copyWith(
-              color: AppColors.GREY_DARK,
-            ),
-          ),
-        ),
-        Text(
-          "by ${recipe.username}",
-          style: AppTextStyle.F14_NORMAL.copyWith(
-            color: AppColors.GREY_DARK,
-          ),
-        ),
-      ]),
     );
   }
 }
