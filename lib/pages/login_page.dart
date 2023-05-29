@@ -53,7 +53,7 @@ class LoginPage extends StatelessWidget {
         ),
         label: Text(label),
         labelStyle: AppTextStyle.F20_BOLD.copyWith(
-          color: AppColors.GREY_D2D2D2,
+          color: AppColors.GREY_LIGHT,
         ),
         floatingLabelStyle: AppTextStyle.F20_NORMAL.copyWith(
           color: AppColors.ORANGE_FE7455,
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: const BorderSide(
-            color: AppColors.GREY_D2D2D2,
+            color: AppColors.GREY_LIGHT,
             width: 2,
           ),
         ),
@@ -110,7 +110,7 @@ class LoginPage extends StatelessWidget {
         Text(
           AppString.OR_DIVIDER,
           style: AppTextStyle.F20_BOLD.copyWith(
-            color: AppColors.GREY_C3BFBF,
+            color: AppColors.GREY_MED,
           ),
         ),
         _getSingleDivider(context),
@@ -122,7 +122,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       width: 90,
       height: 3,
-      color: AppColors.GREY_D2D2D2,
+      color: AppColors.GREY_LIGHT,
     );
   }
 
@@ -173,7 +173,7 @@ class LoginPage extends StatelessWidget {
         Text(
           AppString.DIDNT_HAVE_ANY_ACC_TXT,
           style: AppTextStyle.F20_BOLD.copyWith(
-            color: AppColors.GREY_C3BFBF,
+            color: AppColors.GREY_MED,
           ),
         ),
 

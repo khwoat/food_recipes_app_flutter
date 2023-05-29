@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 class AppTextStyle {
   AppTextStyle._();
 
+  static const TextStyle F14_NORMAL = TextStyle(
+    fontSize: 14,
+  );
+
   static const TextStyle F18_NORMAL = TextStyle(
     fontSize: 18,
   );

@@ -32,6 +32,13 @@ class _AppCardState extends State<AppCard> {
       margin: widget._margin,
       padding: widget._padding,
       decoration: BoxDecoration(
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.GREY_MED,
+            blurRadius: 3,
+            offset: Offset(0, 1.5),
+          ),
+        ],
         color: widget._backgroundColor,
         borderRadius: widget._borderRadius ?? BorderRadius.circular(20.0),
       ),
