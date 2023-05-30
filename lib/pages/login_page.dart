@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
             buttonStyle: AppButtonStyle.ORANGE_BTN,
             onTap: () => Navigator.popAndPushNamed(
               context,
-              AppRoute.DASHBOARD_PAGE,
+              AppRoute.HOME_PAGE,
             ),
           ),
         ],

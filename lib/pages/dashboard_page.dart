@@ -19,7 +19,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   final List<String> _categoryList = ["Category", "Boiled"];
-  final List<String> _sortingList = ["Popularity", "Name"];
+  final List<String> _sortingList = ["Sorting", "Popularity", "Name"];
 
   final List<Recipe> _recipeList = [
     Recipe(
@@ -108,6 +108,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 },
               ),
               const SizedBox(width: 10),
+
               // Sorting dropdown
               BlocBuilder<SortDropdownCubit, SortDropdownState>(
                 builder: (context, state) {
@@ -170,7 +171,7 @@ class _DashboardPageState extends State<DashboardPage> {
       value: text,
       child: Text(
         text,
-        style: AppTextStyle.F18_NORMAL.copyWith(
+        style: AppTextStyle.F18_BOLD.copyWith(
           color: AppColors.GREY_DARK,
         ),
       ),
