@@ -14,19 +14,6 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.ORANGE_FE7455,
-        toolbarHeight: 70,
-        centerTitle: true,
-        title: Text(
-          AppString.NOTIFICATION_PAGE,
-          textAlign: TextAlign.center,
-          style: AppTextStyle.F24_BOLD.copyWith(
-            color: AppColors.WHITE,
-          ),
-        ),
-      ),
-    );
+    return Scaffold();
   }
 }
