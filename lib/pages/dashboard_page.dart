@@ -65,31 +65,6 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.ORANGE_FE7455,
-        toolbarHeight: 70,
-        leading: Builder(builder: (context) {
-          return IconButton(
-            onPressed: () => Scaffold.of(context).openDrawer(),
-            icon: const Icon(Icons.person),
-          );
-        }),
-        centerTitle: true,
-        title: Text(
-          AppString.APP_NAME,
-          textAlign: TextAlign.center,
-          style: AppTextStyle.F24_BOLD.copyWith(
-            color: AppColors.WHITE,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          )
-        ],
-      ),
-      drawer: Drawer(),
       body: Column(
         children: [
           Row(

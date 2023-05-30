@@ -6,6 +6,9 @@ class AppString {
   static const String APP_NAME = "Food Recipes";
   static const String APP_NAME_NEW_LINE = "Food\nRecipes";
 
+  static const String NOTIFICATION_PAGE = "Notifications";
+  static const String FAVORITE_PAGE = "Favorite";
+
   static const String EMAIL_TXT_FIELD = "Email";
   static const String PSWD_TXT_FIELD = "Password";
 

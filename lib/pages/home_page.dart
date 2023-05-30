@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipes_flutter/pages/dashboard_page.dart';
-import 'package:food_recipes_flutter/pages/favorite_page.dart';
 
 import '../constants/colors.dart';
+import '../constants/string.dart';
+import '../constants/text_style.dart';
+import '../route.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Widget> _pageList = [const DashboardPage(), const FavoritePage()];
+  final List<Widget> _pageList = AppRoute.allPageView();
 
   final PageController _pageController = PageController();
 
@@ -21,23 +22,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Expanded(
-          child: PageView(
-            onPageChanged: (value) {
-              setState(() {
-                _pageIndex = value;
-              });
-            },
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: _pageList,
+      appBar: AppBar(
+        backgroundColor: AppColors.ORANGE_FE7455,
+        toolbarHeight: 70,
+        title: Text(
+          AppString.APP_NAME,
+          textAlign: TextAlign.center,
+          style: AppTextStyle.F24_BOLD.copyWith(
+            color: AppColors.WHITE,
           ),
         ),
-        _getBottomNavigationBar(context),
-      ],
-    ));
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.person),
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              onPageChanged: (value) {
+                setState(() {
+                  _pageIndex = value;
+                });
+              },
+              controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: _pageList,
+            ),
+          ),
+          _getBottomNavigationBar(context),
+        ],
+      ),
+    );
   }
 
   Widget _getBottomNavigationBar(BuildContext context) {
@@ -65,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           _getIconButton(context, icon: Icons.home, index: 0),
           _getIconButton(context, icon: Icons.notifications, index: 1),
           _getIconButton(context, icon: Icons.favorite, index: 2),
-          _getIconButton(context, icon: Icons.folder_shared, index: 3),
+          _getIconButton(context, icon: Icons.restaurant, index: 3),
         ],
       ),
     );
