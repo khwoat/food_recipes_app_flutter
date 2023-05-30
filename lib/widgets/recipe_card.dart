@@ -4,6 +4,7 @@ import '../constants/colors.dart';
 import '../constants/text_style.dart';
 import 'app_card.dart';
 
+// Reusable recipe card
 class RecipeCard extends StatefulWidget {
   final String _recipeName;
   final String _username;
@@ -28,13 +29,9 @@ class _RecipeCardState extends State<RecipeCard> {
       padding: const EdgeInsets.all(0),
       child: Column(
         children: [
-          Container(
-            height: 100,
-            clipBehavior: Clip.none,
-            child: Image.network(
-              widget._imagePath ?? "",
-              fit: BoxFit.cover,
-            ),
+          Image.asset(
+            widget._imagePath ?? "",
+            fit: BoxFit.cover,
           ),
           Expanded(
             child: Padding(

@@ -28,7 +28,7 @@ class _DashboardPageState extends State<DashboardPage> {
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],
-      imageList: [],
+      imageList: ["images/tom_yum_kung.webp"],
     ),
     Recipe(
       recipeName: "Pad Thai",
@@ -36,7 +36,7 @@ class _DashboardPageState extends State<DashboardPage> {
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],
-      imageList: [],
+      imageList: ["images/tom_yum_kung.webp"],
     ),
   ];
 
@@ -138,6 +138,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     return RecipeCard(
                       recipeName: recipe.recipeName,
                       username: recipe.username,
+                      imagePath: recipe.imageList.first,
                     );
                   },
                 );

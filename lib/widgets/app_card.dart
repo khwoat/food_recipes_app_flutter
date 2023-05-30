@@ -42,6 +42,7 @@ class _AppCardState extends State<AppCard> {
         color: widget._backgroundColor,
         borderRadius: widget._borderRadius ?? BorderRadius.circular(20.0),
       ),
+      clipBehavior: Clip.antiAlias,
       child: widget._child,
     );
   }
