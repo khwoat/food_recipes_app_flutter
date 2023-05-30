@@ -26,12 +26,12 @@ class Recipe {
     _imageList = json["imageList"];
   }
 
-  Map<String, dynamic> toJson(Recipe model) {
+  Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {};
-    map["recipeName"] = model.recipeName;
-    map["username"] = model.username;
-    map["detailList"] = model.detailList;
-    map["imageList"] = model.imageList;
+    map["recipeName"] = _recipeName;
+    map["username"] = _username;
+    map["detailList"] = _detailList;
+    map["imageList"] = _imageList;
     return map;
   }
 }
@@ -54,10 +54,10 @@ class RecipeDetail {
     _description = json["description"];
   }
 
-  Map<String, dynamic> toJson(RecipeDetail model) {
+  Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {};
-    map["index"] = model.index;
-    map["description"] = model.description;
+    map["index"] = _index;
+    map["description"] = _description;
     return map;
   }
 }

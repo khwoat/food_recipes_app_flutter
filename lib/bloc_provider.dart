@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
 import 'package:food_recipes_flutter/cubit/sort_dropdown/sort_dropdown_cubit.dart';
 
 import 'cubit/cate_dropdown/cate_dropdown_cubit.dart';
@@ -16,8 +17,11 @@ class AppBlocProvider {
   final _recipesCubit = BlocProvider<RecipeListCubit>(
     create: (context) => RecipeListCubit(),
   );
+  final _favCubit = BlocProvider<FavoriteListCubit>(
+    create: (context) => FavoriteListCubit(),
+  );
 
   List<BlocProvider> getAllProvider() {
-    return [_cateDropdownCubit, _sortDropdownCubit, _recipesCubit];
+    return [_cateDropdownCubit, _sortDropdownCubit, _recipesCubit, _favCubit];
   }
 }
