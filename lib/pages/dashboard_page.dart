@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
-import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/cubit/sort_dropdown/sort_dropdown_cubit.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
@@ -44,6 +43,8 @@ class _DashboardPageState extends State<DashboardPage> {
   late final SortDropdownCubit _sortDropdownCubit;
   late final RecipeListCubit _recipesCubit;
 
+  bool isShowSearchBox = false;
+
   @override
   void didChangeDependencies() {
     _cateDropdownCubit = BlocProvider.of<CategoryDropdownCubit>(context);
@@ -67,36 +68,47 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              // Category dropdown
-              BlocBuilder<CategoryDropdownCubit, CategoryDropdownState>(
-                builder: (context, state) {
-                  return _getDropdownButton(
-                    context,
-                    value: state.selectedValue,
-                    valueList: state.valueList,
-                    onChanged: (value) =>
-                        _cateDropdownCubit.selectNewValue(value ?? ""),
-                  );
-                },
-              ),
-              const SizedBox(width: 10),
-
-              // Sorting dropdown
-              BlocBuilder<SortDropdownCubit, SortDropdownState>(
-                builder: (context, state) {
-                  return _getDropdownButton(
-                    context,
-                    value: state.selectedValue,
-                    valueList: state.valueList,
-                    onChanged: (value) =>
-                        _sortDropdownCubit.selectNewValue(value ?? ""),
-                  );
-                },
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(top: 15, left: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: !isShowSearchBox
+                        ? _getCateSortDropdown(context)
+                        : SizedBox(
+                            height: 40,
+                            width: double.infinity,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: const BorderSide(
+                                    color: AppColors.GREY_LIGHT,
+                                    width: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isShowSearchBox = !isShowSearchBox;
+                    });
+                  },
+                  icon: Icon(
+                    isShowSearchBox ? Icons.close : Icons.search,
+                    color: AppColors.GREY_DARK,
+                  ),
+                ),
+              ],
+            ),
           ),
 
           // Recipe card grid view
@@ -150,6 +162,40 @@ class _DashboardPageState extends State<DashboardPage> {
           color: AppColors.GREY_DARK,
         ),
       ),
+    );
+  }
+
+  Widget _getCateSortDropdown(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        // Category dropdown
+        BlocBuilder<CategoryDropdownCubit, CategoryDropdownState>(
+          builder: (context, state) {
+            return _getDropdownButton(
+              context,
+              value: state.selectedValue,
+              valueList: state.valueList,
+              onChanged: (value) =>
+                  _cateDropdownCubit.selectNewValue(value ?? ""),
+            );
+          },
+        ),
+        const SizedBox(width: 10),
+
+        // Sorting dropdown
+        BlocBuilder<SortDropdownCubit, SortDropdownState>(
+          builder: (context, state) {
+            return _getDropdownButton(
+              context,
+              value: state.selectedValue,
+              valueList: state.valueList,
+              onChanged: (value) =>
+                  _sortDropdownCubit.selectNewValue(value ?? ""),
+            );
+          },
+        ),
+      ],
     );
   }
 }
