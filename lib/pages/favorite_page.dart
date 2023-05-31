@@ -64,7 +64,7 @@ class _FavoritePageState extends State<FavoritePage> {
           children: [
             Text(
               AppString.FAV_HEADER,
-              style: AppTextStyle.F24_BOLD.copyWith(
+              style: AppTextStyle.F22_BOLD.copyWith(
                 color: AppColors.GREY_DARK,
               ),
             ),
@@ -77,12 +77,11 @@ class _FavoritePageState extends State<FavoritePage> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisExtent: 210,
+                      mainAxisExtent: 220,
                     ),
                     itemCount: state.favList.length,
                     itemBuilder: (context, index) {
                       final Recipe fav = state.favList[index];
-                      print(fav.toJson());
                       return RecipeCard(
                         recipeName: fav.recipeName,
                         username: fav.username,

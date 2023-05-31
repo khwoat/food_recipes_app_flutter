@@ -66,11 +66,11 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 15),
-            child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -109,31 +109,31 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-          ),
-
-          // Recipe card grid view
-          Expanded(
-            child: BlocBuilder<RecipeListCubit, RecipeListState>(
-              builder: (context, state) {
-                return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisExtent: 210,
-                  ),
-                  itemCount: state.recipeList.length,
-                  itemBuilder: (context, index) {
-                    final Recipe recipe = state.recipeList[index];
-                    return RecipeCard(
-                      recipeName: recipe.recipeName,
-                      username: recipe.username,
-                      imagePath: recipe.imageList.first,
-                    );
-                  },
-                );
-              },
+      
+            // Recipe card grid view
+            Expanded(
+              child: BlocBuilder<RecipeListCubit, RecipeListState>(
+                builder: (context, state) {
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisExtent: 220,
+                    ),
+                    itemCount: state.recipeList.length,
+                    itemBuilder: (context, index) {
+                      final Recipe recipe = state.recipeList[index];
+                      return RecipeCard(
+                        recipeName: recipe.recipeName,
+                        username: recipe.username,
+                        imagePath: recipe.imageList.first,
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

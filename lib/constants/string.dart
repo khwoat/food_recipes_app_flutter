@@ -21,5 +21,5 @@ class AppString {
   static const String FACEBOOK_BTN = "Facebook";
   static const String GOOGLE_BTN = "Google";
 
-  static const String FAV_HEADER = "Your favorite recipes";
+  static const String FAV_HEADER = "Your Favorites";
 }
