@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
           textAlign: TextAlign.center,
           style: AppTextStyle.F24_BOLD.copyWith(
             color: AppColors.WHITE,
+            fontFamily: "Forte",
           ),
         ),
         actions: [

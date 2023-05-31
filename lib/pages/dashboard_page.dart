@@ -109,13 +109,14 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ],
             ),
-      
+
             // Recipe card grid view
             Expanded(
               child: BlocBuilder<RecipeListCubit, RecipeListState>(
                 builder: (context, state) {
                   return GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisExtent: 220,
                     ),
@@ -158,7 +159,7 @@ class _DashboardPageState extends State<DashboardPage> {
       value: text,
       child: Text(
         text,
-        style: AppTextStyle.F18_BOLD.copyWith(
+        style: AppTextStyle.F18_NORMAL.copyWith(
           color: AppColors.GREY_DARK,
         ),
       ),

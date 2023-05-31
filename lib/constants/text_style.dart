@@ -26,7 +26,7 @@ class AppTextStyle {
     fontSize: 20,
     fontWeight: FontWeight.bold,
   );
-  
+
   static const TextStyle F22_NORMAL = TextStyle(
     fontSize: 22,
   );
@@ -43,6 +43,11 @@ class AppTextStyle {
 
   static const TextStyle F28_BOLD = TextStyle(
     fontSize: 28,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle F30_BOLD = TextStyle(
+    fontSize: 30,
     fontWeight: FontWeight.bold,
   );
 }

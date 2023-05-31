@@ -69,6 +69,8 @@ class _FavoritePageState extends State<FavoritePage> {
               ),
             ),
 
+            const SizedBox(height: 5),
+
             // Fav list grid
             Expanded(
               child: BlocBuilder<FavoriteListCubit, FavoriteListState>(

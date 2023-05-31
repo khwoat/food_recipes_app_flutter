@@ -31,6 +31,7 @@ class LoginPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: AppTextStyle.F28_BOLD.copyWith(
                   color: AppColors.ORANGE_FE7455,
+                  fontFamily: "Forte",
                 ),
               ),
               _getEmailPswdForm(context),

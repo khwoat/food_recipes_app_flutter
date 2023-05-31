@@ -23,6 +23,7 @@ class FoodRecipesApp extends StatelessWidget {
         initialRoute: AppRoute.SPLASH_PAGE,
         routes: AppRoute.allRoutes(context),
         theme: ThemeData(
+          fontFamily: "Prompt",
           colorScheme: const ColorScheme(
             brightness: Brightness.light,
             background: AppColors.WHITE,

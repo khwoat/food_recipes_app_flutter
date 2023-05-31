@@ -49,7 +49,7 @@ class _RecipeCardState extends State<RecipeCard> {
                   Text(
                     "by ${widget._username}",
                     style: AppTextStyle.F14_NORMAL.copyWith(
-                      color: AppColors.GREY_DARK,
+                      color: AppColors.GREY_MED,
                     ),
                   ),
                 ],

@@ -25,8 +25,9 @@ class _SplashPageState extends State<SplashPage> {
           child: Text(
             AppString.APP_NAME_NEW_LINE,
             textAlign: TextAlign.center,
-            style: AppTextStyle.F28_BOLD.copyWith(
+            style: AppTextStyle.F30_BOLD.copyWith(
               color: AppColors.WHITE,
+              fontFamily: "Forte",
             ),
           ),
         ),
