@@ -22,4 +22,5 @@ class AppString {
   static const String GOOGLE_BTN = "Google";
 
   static const String FAV_HEADER = "Your Favorites";
+  static const String NOTFICATION_HEADER = "Notifications";
 }
