@@ -23,4 +23,5 @@ class AppString {
 
   static const String FAV_HEADER = "Your Favorites";
   static const String NOTFICATION_HEADER = "Notifications";
+  static const String USER_RECIPES_HEADER = "Your recipes";
 }

@@ -7,6 +7,7 @@ import 'package:food_recipes_flutter/pages/home_page.dart';
 import 'package:food_recipes_flutter/pages/login_page.dart';
 import 'package:food_recipes_flutter/pages/notification_page.dart';
 import 'package:food_recipes_flutter/pages/splash_page.dart';
+import 'package:food_recipes_flutter/pages/user_recipes_page.dart';
 
 class AppRoute {
   static const String SPLASH_PAGE = "/splash";
@@ -33,7 +34,8 @@ class AppRoute {
     return [
       const DashboardPage(),
       const NotificationPage(),
-      const FavoritePage()
+      const FavoritePage(),
+      const UserRecipesPage()
     ];
   }
 }
