@@ -10,7 +10,7 @@ class AppButtonStyle {
 
   static final ButtonStyle BASIC_BUTTON = ButtonStyle(
     padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
-    textStyle: const MaterialStatePropertyAll(AppTextStyle.F24_BOLD),
+    textStyle: MaterialStatePropertyAll(AppTextStyle.F24_BOLD),
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),

@@ -34,12 +34,17 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.person),
+          Builder(
+            builder: (context) {
+              return IconButton(
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                icon: const Icon(Icons.person),
+              );
+            },
           )
         ],
       ),
+      endDrawer: _getDrawer(context),
       body: Column(
         children: [
           Expanded(
@@ -57,6 +62,73 @@ class _HomePageState extends State<HomePage> {
           _getBottomNavigationBar(context),
         ],
       ),
+    );
+  }
+
+  // End drawer for setting menu
+  Widget _getDrawer(BuildContext context) {
+    return Drawer(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 60, left: 30, right: 30),
+        child: Column(
+          children: [
+            // Image and username
+            const Icon(
+              Icons.person,
+              size: 50,
+            ),
+            const SizedBox(height: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Thiwakorn Srimoo",
+                  style: AppTextStyle.F20_BOLD,
+                ),
+                Text(
+                  "thiwakorn.srimo@gmail.com",
+                  style: AppTextStyle.F14_NORMAL,
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            _getDrawerMenuItem(context, label: "Setting", onTap: () {}),
+            _getDrawerMenuItem(
+              context,
+              label: "Logout",
+              onTap: () =>
+                  Navigator.popAndPushNamed(context, AppRoute.LOGIN_PAGE),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // For setting and logout
+  Widget _getDrawerMenuItem(
+    BuildContext context, {
+    required String label,
+    required Function() onTap,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5),
+          child: InkWell(
+            onTap: onTap,
+            child: Text(
+              label,
+              style: AppTextStyle.F22_BOLD,
+            ),
+          ),
+        ),
+        Container(
+          height: 1.5,
+          color: AppColors.GREY_MED,
+        )
+      ],
     );
   }
 

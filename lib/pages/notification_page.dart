@@ -57,7 +57,7 @@ class _NotificationPageState extends State<NotificationPage> {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          subtitle: const Text(
+          subtitle: Text(
             "Notiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
             style: AppTextStyle.F14_NORMAL,
             maxLines: 2,
