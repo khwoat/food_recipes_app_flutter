@@ -92,10 +92,14 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(height: 15),
-            _getDrawerMenuItem(context, label: "Setting", onTap: () {}),
             _getDrawerMenuItem(
               context,
-              label: "Logout",
+              label: AppString.SETTING_DRAWER,
+              onTap: () {},
+            ),
+            _getDrawerMenuItem(
+              context,
+              label: AppString.LOGOUT_DRAWER,
               onTap: () =>
                   Navigator.popAndPushNamed(context, AppRoute.LOGIN_PAGE),
             ),

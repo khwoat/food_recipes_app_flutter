@@ -9,8 +9,10 @@ class AppString {
   static const String NOTIFICATION_PAGE = "Notifications";
   static const String FAVORITE_PAGE = "Favorite";
 
+  static const String USERNAME_TXT_FIELD = "Username";
   static const String EMAIL_TXT_FIELD = "Email";
   static const String PSWD_TXT_FIELD = "Password";
+  static const String CONFIRM_PSWD_TXT_FIELD = "Confirm Password";
 
   static const String DIDNT_HAVE_ANY_ACC_TXT = "Didn't have any account?";
   static const String REGISTER_TXT_BTN = "Register";
@@ -24,4 +26,7 @@ class AppString {
   static const String FAV_HEADER = "Your Favorites";
   static const String NOTFICATION_HEADER = "Notifications";
   static const String USER_RECIPES_HEADER = "Your recipes";
+
+  static const String SETTING_DRAWER = "Setting";
+  static const String LOGOUT_DRAWER = "Logout";
 }

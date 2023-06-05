@@ -182,7 +182,7 @@ class LoginPage extends StatelessWidget {
 
         // Register text btn
         InkWell(
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, AppRoute.REGISTER_PAGE),
           child: Text(
             AppString.REGISTER_TXT_BTN,
             style: AppTextStyle.F20_BOLD.copyWith(

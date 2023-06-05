@@ -6,12 +6,14 @@ import 'package:food_recipes_flutter/pages/favorite_page.dart';
 import 'package:food_recipes_flutter/pages/home_page.dart';
 import 'package:food_recipes_flutter/pages/login_page.dart';
 import 'package:food_recipes_flutter/pages/notification_page.dart';
+import 'package:food_recipes_flutter/pages/register_page.dart';
 import 'package:food_recipes_flutter/pages/splash_page.dart';
 import 'package:food_recipes_flutter/pages/user_recipes_page.dart';
 
 class AppRoute {
   static const String SPLASH_PAGE = "/splash";
   static const String LOGIN_PAGE = "/login";
+  static const String REGISTER_PAGE = "/register";
   static const String HOME_PAGE = "/home";
   static const String DASHBOARD_PAGE = "/dashboard";
   static const String NOTIFICATION_PAGE = "/notification";
@@ -22,6 +24,7 @@ class AppRoute {
     return {
       SPLASH_PAGE: (context) => const SplashPage(),
       LOGIN_PAGE: (context) => const LoginPage(),
+      REGISTER_PAGE: (context) => const RegisterPage(),
       HOME_PAGE: (context) => const HomePage(),
       DASHBOARD_PAGE: (context) => const DashboardPage(),
       NOTIFICATION_PAGE: (context) => const NotificationPage(),
