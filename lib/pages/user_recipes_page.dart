@@ -28,7 +28,7 @@ class _UserRecipesPageState extends State<UserRecipesPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppString.USER_RECIPES_HEADER,
+              UIString.USER_RECIPES_HEADER,
               style: AppTextStyle.F22_BOLD.copyWith(
                 color: AppColors.GREY_DARK,
               ),

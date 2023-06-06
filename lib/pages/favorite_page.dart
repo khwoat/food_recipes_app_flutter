@@ -63,7 +63,7 @@ class _FavoritePageState extends State<FavoritePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppString.FAV_HEADER,
+              UIString.FAV_HEADER,
               style: AppTextStyle.F22_BOLD.copyWith(
                 color: AppColors.GREY_DARK,
               ),

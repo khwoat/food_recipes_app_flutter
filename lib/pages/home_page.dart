@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColors.ORANGE_FE7455,
         toolbarHeight: 70,
         title: Text(
-          AppString.APP_NAME,
+          UIString.APP_NAME,
           textAlign: TextAlign.center,
           style: AppTextStyle.F24_BOLD.copyWith(
             color: AppColors.WHITE,
@@ -97,12 +97,12 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 15),
             _getDrawerMenuButton(
               context,
-              label: AppString.SETTING_DRAWER,
+              label: UIString.SETTING_DRAWER,
               onTap: () {},
             ),
             _getDrawerMenuButton(
               context,
-              label: AppString.LOGOUT_DRAWER,
+              label: UIString.LOGOUT_DRAWER,
               onTap: () => Navigator.of(context).pushReplacementNamed(
                 AppRoute.LOGIN_PAGE,
               ),

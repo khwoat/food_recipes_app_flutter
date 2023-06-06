@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
         color: AppColors.ORANGE_FE7455,
         child: Center(
           child: Text(
-            AppString.APP_NAME_NEW_LINE,
+            UIString.APP_NAME_NEW_LINE,
             textAlign: TextAlign.center,
             style: AppTextStyle.F30_BOLD.copyWith(
               color: AppColors.WHITE,

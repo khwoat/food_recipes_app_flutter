@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
-class AppString {
-  AppString._();
+class UIString {
+  UIString._();
 
   static const String APP_NAME = "Food Recipes";
   static const String APP_NAME_NEW_LINE = "Food\nRecipes";
@@ -35,7 +35,7 @@ class AppString {
   static const String LOGOUT_DRAWER = "Logout";
 }
 
-class AppStringAuth {
+class AuthString {
   // For Login
   static const String USER_NOT_FOUND_CODE = "user-not-found";
   static const String USER_NOT_FOUND_TXT = "User not found";
@@ -49,7 +49,12 @@ class AppStringAuth {
   static const String EMAIL_INUSE_TXT = "Email is already in use";
 }
 
-class AppStringDB {
+class FirestoreString {
   // Collection
   static const String USERS_COL = "users";
+}
+
+class ValidatorString {
+  static const String FIELD_EMPTY = "Please enter.";
+  static const String NOT_MATCH_PATTERN = "Some letter is not appropiate.";
 }

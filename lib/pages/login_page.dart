@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                AppString.APP_NAME_NEW_LINE,
+                UIString.APP_NAME_NEW_LINE,
                 textAlign: TextAlign.center,
                 style: AppTextStyle.F28_BOLD.copyWith(
                   color: AppColors.ORANGE_FE7455,
@@ -82,14 +82,14 @@ class LoginPage extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          _getTextFormField(context, AppString.EMAIL_TXT_FIELD),
+          _getTextFormField(context, UIString.EMAIL_TXT_FIELD),
           const SizedBox(height: 10),
-          _getTextFormField(context, AppString.PSWD_TXT_FIELD),
+          _getTextFormField(context, UIString.PSWD_TXT_FIELD),
           const SizedBox(height: 15),
           // Login btn
           _getButton(
             context,
-            label: AppString.LOGIN_BTN,
+            label: UIString.LOGIN_BTN,
             buttonStyle: AppButtonStyle.ORANGE_BTN,
             onTap: () => Navigator.popAndPushNamed(
               context,
@@ -109,7 +109,7 @@ class LoginPage extends StatelessWidget {
       children: [
         _getSingleDivider(context),
         Text(
-          AppString.OR_DIVIDER,
+          UIString.OR_DIVIDER,
           style: AppTextStyle.F20_BOLD.copyWith(
             color: AppColors.GREY_MED,
           ),
@@ -150,7 +150,7 @@ class LoginPage extends StatelessWidget {
         // Facebook btn
         _getButton(
           context,
-          label: AppString.FACEBOOK_BTN,
+          label: UIString.FACEBOOK_BTN,
           buttonStyle: AppButtonStyle.BLUE_BTN,
           onTap: () {},
         ),
@@ -160,7 +160,7 @@ class LoginPage extends StatelessWidget {
         // Google btn
         _getButton(
           context,
-          label: AppString.GOOGLE_BTN,
+          label: UIString.GOOGLE_BTN,
           buttonStyle: AppButtonStyle.WHITE_BTN,
           onTap: () {},
         ),
@@ -172,7 +172,7 @@ class LoginPage extends StatelessWidget {
     return Column(
       children: [
         Text(
-          AppString.DIDNT_HAVE_ANY_ACC_TXT,
+          UIString.DIDNT_HAVE_ANY_ACC_TXT,
           style: AppTextStyle.F20_BOLD.copyWith(
             color: AppColors.GREY_MED,
           ),
@@ -184,7 +184,7 @@ class LoginPage extends StatelessWidget {
         InkWell(
           onTap: () => Navigator.pushNamed(context, AppRoute.REGISTER_PAGE),
           child: Text(
-            AppString.REGISTER_TXT_BTN,
+            UIString.REGISTER_TXT_BTN,
             style: AppTextStyle.F20_BOLD.copyWith(
               shadows: [
                 const Shadow(

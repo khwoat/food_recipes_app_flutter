@@ -24,7 +24,7 @@ class _NotificationPageState extends State<NotificationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppString.NOTFICATION_HEADER,
+              UIString.NOTFICATION_HEADER,
               style: AppTextStyle.F22_BOLD.copyWith(
                 color: AppColors.GREY_DARK,
               ),

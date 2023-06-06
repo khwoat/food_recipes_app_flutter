@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
+import 'package:food_recipes_flutter/firebase/auth.dart';
+import 'package:food_recipes_flutter/validators.dart';
 
 import '../constants/button_style.dart';
 import '../constants/string.dart';
 import '../constants/text_style.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+
+  final _displayNameCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(toolbarHeight: 0, backgroundColor: AppColors.WHITE),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -29,10 +38,11 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     Text(
-                      AppString.REGISTER_HEAD,
+                      UIString.REGISTER_HEAD,
                       style: AppTextStyle.F28_BOLD.copyWith(
                         color: AppColors.ORANGE_FE7455,
                       ),
@@ -40,12 +50,25 @@ class RegisterPage extends StatelessWidget {
 
                     const SizedBox(height: 15),
 
-                    _getTextFormField(context, AppString.DISPLAYNAME_TXT_FIELD),
-                    _getTextFormField(context, AppString.EMAIL_TXT_FIELD),
-                    _getTextFormField(context, AppString.PSWD_TXT_FIELD),
                     _getTextFormField(
                       context,
-                      AppString.CONFIRM_PSWD_TXT_FIELD,
+                      label: UIString.DISPLAYNAME_TXT_FIELD,
+                      controller: _displayNameCtrl,
+                    ),
+                    _getTextFormField(
+                      context,
+                      label: UIString.EMAIL_TXT_FIELD,
+                      validator: TextFieldValidator.emailValidator,
+                      controller: _emailCtrl,
+                    ),
+                    _getTextFormField(
+                      context,
+                      label: UIString.PSWD_TXT_FIELD,
+                      controller: _passwordCtrl,
+                    ),
+                    _getTextFormField(
+                      context,
+                      label: UIString.CONFIRM_PSWD_TXT_FIELD,
                     ),
 
                     const SizedBox(height: 5),
@@ -53,8 +76,18 @@ class RegisterPage extends StatelessWidget {
                     // Register button
                     _getButton(
                       context,
-                      label: AppString.REGISTER_BTN,
-                      onTap: () => Navigator.of(context).pop(),
+                      label: UIString.REGISTER_BTN,
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await AppAuth.register(
+                            _displayNameCtrl.text,
+                            _emailCtrl.text,
+                            _passwordCtrl.text,
+                          ).then((value) => Navigator.of(context).pop());
+                        } else {
+                          Navigator.of(context).pop();
+                        }
+                      },
                       buttonStyle: AppButtonStyle.ORANGE_BTN,
                     ),
 
@@ -74,10 +107,17 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _getTextFormField(BuildContext context, String label) {
+  Widget _getTextFormField(
+    BuildContext context, {
+    required String label,
+    TextEditingController? controller,
+    String? Function(String?)? validator,
+  }) {
     return Column(
       children: [
         TextFormField(
+          controller: controller,
+          validator: validator,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 10,
@@ -118,7 +158,7 @@ class RegisterPage extends StatelessWidget {
       children: [
         _getSingleDivider(context),
         Text(
-          AppString.OR_DIVIDER,
+          UIString.OR_DIVIDER,
           style: AppTextStyle.F20_BOLD.copyWith(
             color: AppColors.GREY_MED,
           ),
@@ -159,7 +199,7 @@ class RegisterPage extends StatelessWidget {
         // Facebook btn
         _getButton(
           context,
-          label: AppString.FACEBOOK_BTN,
+          label: UIString.FACEBOOK_BTN,
           buttonStyle: AppButtonStyle.BLUE_BTN,
           onTap: () {},
         ),
@@ -169,7 +209,7 @@ class RegisterPage extends StatelessWidget {
         // Google btn
         _getButton(
           context,
-          label: AppString.GOOGLE_BTN,
+          label: UIString.GOOGLE_BTN,
           buttonStyle: AppButtonStyle.WHITE_BTN,
           onTap: () {},
         ),

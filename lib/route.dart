@@ -24,7 +24,7 @@ class AppRoute {
     return {
       SPLASH_PAGE: (context) => const SplashPage(),
       LOGIN_PAGE: (context) => const LoginPage(),
-      REGISTER_PAGE: (context) => const RegisterPage(),
+      REGISTER_PAGE: (context) => RegisterPage(),
       HOME_PAGE: (context) => const HomePage(),
       DASHBOARD_PAGE: (context) => const DashboardPage(),
       NOTIFICATION_PAGE: (context) => const NotificationPage(),
