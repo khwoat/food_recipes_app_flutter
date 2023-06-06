@@ -22,19 +22,47 @@ class RegisterPage extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () => Navigator.of(context).pop(),
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
             ),
+
+            // Register form
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Form(
                 child: Column(
                   children: [
+                    Text(
+                      AppString.REGISTER_HEAD,
+                      style: AppTextStyle.F28_BOLD.copyWith(
+                        color: AppColors.ORANGE_FE7455,
+                      ),
+                    ),
+
+                    const SizedBox(height: 15),
+
                     _getTextFormField(context, AppString.USERNAME_TXT_FIELD),
                     _getTextFormField(context, AppString.EMAIL_TXT_FIELD),
                     _getTextFormField(context, AppString.PSWD_TXT_FIELD),
                     _getTextFormField(
-                        context, AppString.CONFIRM_PSWD_TXT_FIELD),
-                    _getDivider(context),
+                      context,
+                      AppString.CONFIRM_PSWD_TXT_FIELD,
+                    ),
+
+                    const SizedBox(height: 5),
+
+                    // Register button
+                    _getButton(
+                      context,
+                      label: AppString.REGISTER_BTN,
+                      onTap: () => Navigator.of(context).pop(),
+                      buttonStyle: AppButtonStyle.ORANGE_BTN,
+                    ),
+
+                    // Divider
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: _getDivider(context),
+                    ),
                     _getFacebookGoogleBtn(context),
                   ],
                 ),

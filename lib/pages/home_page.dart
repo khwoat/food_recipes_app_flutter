@@ -100,8 +100,9 @@ class _HomePageState extends State<HomePage> {
             _getDrawerMenuItem(
               context,
               label: AppString.LOGOUT_DRAWER,
-              onTap: () =>
-                  Navigator.popAndPushNamed(context, AppRoute.LOGIN_PAGE),
+              onTap: () => Navigator.of(context).pushReplacementNamed(
+                AppRoute.LOGIN_PAGE,
+              ),
             ),
           ],
         ),

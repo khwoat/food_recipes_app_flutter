@@ -20,8 +20,11 @@ class AppString {
   static const String OR_DIVIDER = "OR";
 
   static const String LOGIN_BTN = "Login";
+  static const String REGISTER_BTN = "Register";
   static const String FACEBOOK_BTN = "Facebook";
   static const String GOOGLE_BTN = "Google";
+
+  static const String REGISTER_HEAD = "Register";
 
   static const String FAV_HEADER = "Your Favorites";
   static const String NOTFICATION_HEADER = "Notifications";

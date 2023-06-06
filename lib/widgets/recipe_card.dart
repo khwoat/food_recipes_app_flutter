@@ -27,33 +27,49 @@ class _RecipeCardState extends State<RecipeCard> {
   Widget build(BuildContext context) {
     return AppCard(
       padding: const EdgeInsets.all(0),
-      child: Column(
+      child: Stack(
         children: [
-          Image.asset(
-            widget._imagePath ?? "",
-            fit: BoxFit.cover,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget._recipeName,
-                      style: AppTextStyle.F18_BOLD.copyWith(
-                        color: AppColors.GREY_DARK,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "by ${widget._username}",
-                    style: AppTextStyle.F14_NORMAL.copyWith(
-                      color: AppColors.GREY_MED,
-                    ),
-                  ),
-                ],
+          Column(
+            children: [
+              // Recipe banner
+              Image.asset(
+                widget._imagePath ?? "",
+                fit: BoxFit.cover,
               ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget._recipeName,
+                          style: AppTextStyle.F18_BOLD.copyWith(
+                            color: AppColors.GREY_DARK,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        "by ${widget._username}",
+                        style: AppTextStyle.F14_NORMAL.copyWith(
+                          color: AppColors.GREY_MED,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          // Favorite icon
+          const Positioned(
+            top: 8,
+            right: 10,
+            child: Icon(
+              Icons.favorite_outline,
+              color: AppColors.WHITE,
+              size: 30,
             ),
           ),
         ],
