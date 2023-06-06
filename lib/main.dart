@@ -3,8 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/bloc_provider.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/route.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase/firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MultiBlocProvider(
     providers: AppBlocProvider().getAllProvider(),
     child: const FoodRecipesApp(),

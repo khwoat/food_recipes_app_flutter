@@ -9,7 +9,8 @@ class AppString {
   static const String NOTIFICATION_PAGE = "Notifications";
   static const String FAVORITE_PAGE = "Favorite";
 
-  static const String USERNAME_TXT_FIELD = "Username";
+  // Label of text fields
+  static const String DISPLAYNAME_TXT_FIELD = "Username";
   static const String EMAIL_TXT_FIELD = "Email";
   static const String PSWD_TXT_FIELD = "Password";
   static const String CONFIRM_PSWD_TXT_FIELD = "Confirm Password";
@@ -32,4 +33,23 @@ class AppString {
 
   static const String SETTING_DRAWER = "Setting";
   static const String LOGOUT_DRAWER = "Logout";
+}
+
+class AppStringAuth {
+  // For Login
+  static const String USER_NOT_FOUND_CODE = "user-not-found";
+  static const String USER_NOT_FOUND_TXT = "User not found";
+  static const String WRONG_PASS_CODE = "wrong-password";
+  static const String WRONG_PASS_TXT = "Wrong password";
+
+  // For Register
+  static const String WEAK_PASS_CODE = "weak-password";
+  static const String WEAK_PASS_TXT = "Weak password";
+  static const String EMAIL_INUSE_CODE = "email-already-in-use";
+  static const String EMAIL_INUSE_TXT = "Email is already in use";
+}
+
+class AppStringDB {
+  // Collection
+  static const String USERS_COL = "users";
 }

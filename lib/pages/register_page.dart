@@ -40,7 +40,7 @@ class RegisterPage extends StatelessWidget {
 
                     const SizedBox(height: 15),
 
-                    _getTextFormField(context, AppString.USERNAME_TXT_FIELD),
+                    _getTextFormField(context, AppString.DISPLAYNAME_TXT_FIELD),
                     _getTextFormField(context, AppString.EMAIL_TXT_FIELD),
                     _getTextFormField(context, AppString.PSWD_TXT_FIELD),
                     _getTextFormField(
