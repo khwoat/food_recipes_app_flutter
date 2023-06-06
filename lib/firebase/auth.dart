@@ -11,6 +11,9 @@ class AppAuth {
 
   final db = FirebaseFirestore.instance;
 
+  /*
+   * Login function
+   */
   Future<void> login(String email, String password) async {
     try {
       final cred = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -27,6 +30,9 @@ class AppAuth {
     }
   }
 
+  /*
+   * Register function
+   */
   Future<void> register(
     String displayName,
     String email,
