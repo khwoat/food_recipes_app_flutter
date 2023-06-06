@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipes_flutter/constants/button_style.dart';
 
 import '../constants/colors.dart';
 import '../constants/string.dart';
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
   Widget _getDrawer(BuildContext context) {
     return Drawer(
       child: Padding(
-        padding: const EdgeInsets.only(top: 60, left: 30, right: 30),
+        padding: const EdgeInsets.only(top: 80, left: 30, right: 30),
         child: Column(
           children: [
             // Image and username
@@ -83,7 +84,9 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "Thiwakorn Srimoo",
-                  style: AppTextStyle.F20_BOLD,
+                  style: AppTextStyle.F20_BOLD.copyWith(
+                    color: AppColors.ORANGE_FE7455,
+                  ),
                 ),
                 Text(
                   "thiwakorn.srimo@gmail.com",
@@ -92,12 +95,12 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(height: 15),
-            _getDrawerMenuItem(
+            _getDrawerMenuButton(
               context,
               label: AppString.SETTING_DRAWER,
               onTap: () {},
             ),
-            _getDrawerMenuItem(
+            _getDrawerMenuButton(
               context,
               label: AppString.LOGOUT_DRAWER,
               onTap: () => Navigator.of(context).pushReplacementNamed(
@@ -111,29 +114,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   // For setting and logout
-  Widget _getDrawerMenuItem(
+  Widget _getDrawerMenuButton(
     BuildContext context, {
     required String label,
     required Function() onTap,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5),
-          child: InkWell(
-            onTap: onTap,
-            child: Text(
-              label,
-              style: AppTextStyle.F22_BOLD,
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: AppButtonStyle.WHITE_BTN,
+        child: Center(
+          child: Text(
+            label,
+            style: AppTextStyle.F22_BOLD,
           ),
         ),
-        Container(
-          height: 1.5,
-          color: AppColors.GREY_MED,
-        )
-      ],
+      ),
     );
   }
 
