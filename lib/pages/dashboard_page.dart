@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
-import 'package:food_recipes_flutter/cubit/sort_dropdown/sort_dropdown_cubit.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
-
-import '../cubit/cate_dropdown/cate_dropdown_cubit.dart';
+import '../cubit/dropdown/dropdown_cubit.dart';
 import '../cubit/recipe_list/recipe_list_cubit.dart';
 import '../model/recipe_list.dart';
 
@@ -39,16 +37,14 @@ class _DashboardPageState extends State<DashboardPage> {
     ),
   ];
 
-  late final CategoryDropdownCubit _cateDropdownCubit;
-  late final SortDropdownCubit _sortDropdownCubit;
+  final DropdownCubit _cateDropdownCubit = DropdownCubit();
+  final DropdownCubit _sortDropdownCubit = DropdownCubit();
   late final RecipeListCubit _recipesCubit;
 
   bool isShowSearchBox = false;
 
   @override
   void didChangeDependencies() {
-    _cateDropdownCubit = BlocProvider.of<CategoryDropdownCubit>(context);
-    _sortDropdownCubit = BlocProvider.of<SortDropdownCubit>(context);
     _recipesCubit = BlocProvider.of<RecipeListCubit>(context);
     super.didChangeDependencies();
   }
@@ -171,7 +167,8 @@ class _DashboardPageState extends State<DashboardPage> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         // Category dropdown
-        BlocBuilder<CategoryDropdownCubit, CategoryDropdownState>(
+        BlocBuilder<DropdownCubit, DropdownState>(
+          bloc: _cateDropdownCubit,
           builder: (context, state) {
             return _getDropdownButton(
               context,
@@ -185,7 +182,8 @@ class _DashboardPageState extends State<DashboardPage> {
         const SizedBox(width: 10),
 
         // Sorting dropdown
-        BlocBuilder<SortDropdownCubit, SortDropdownState>(
+        BlocBuilder<DropdownCubit, DropdownState>(
+          bloc: _sortDropdownCubit,
           builder: (context, state) {
             return _getDropdownButton(
               context,

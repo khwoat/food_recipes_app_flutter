@@ -1,10 +1,10 @@
-part of 'cate_dropdown_cubit.dart';
+part of 'dropdown_cubit.dart';
 
 @immutable
-abstract class CategoryDropdownState extends Equatable {
+abstract class DropdownState extends Equatable {
   final String? _selectedValue;
   final List<String>? _valueList;
-  const CategoryDropdownState({
+  const DropdownState({
     String? selectedValue,
     List<String>? valueList,
   })  : _selectedValue = selectedValue,
@@ -17,12 +17,12 @@ abstract class CategoryDropdownState extends Equatable {
   List<Object?> get props => [_selectedValue, _valueList];
 }
 
-class CategoryDropdownInitial extends CategoryDropdownState {
-  const CategoryDropdownInitial({super.selectedValue, super.valueList});
+class DropdownInitial extends DropdownState {
+  const DropdownInitial({super.selectedValue, super.valueList});
 }
 
-class CategoryDropdownAction extends CategoryDropdownState {
-  const CategoryDropdownAction({
+class DropdownAction extends DropdownState {
+  const DropdownAction({
     required super.selectedValue,
     required super.valueList,
   });

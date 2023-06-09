@@ -2,20 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-part 'cate_dropdown_state.dart';
+part 'dropdown_state.dart';
 
-class CategoryDropdownCubit extends Cubit<CategoryDropdownState> {
-  CategoryDropdownCubit() : super(const CategoryDropdownInitial());
+class DropdownCubit extends Cubit<DropdownState> {
+  DropdownCubit() : super(const DropdownInitial());
 
   void init(List<String>? valueList) {
-    emit(CategoryDropdownInitial(
+    emit(DropdownInitial(
       selectedValue: valueList?.first,
       valueList: valueList,
     ));
   }
 
   void selectNewValue(String value) {
-    emit(CategoryDropdownAction(
+    emit(DropdownAction(
         selectedValue: value, valueList: state.valueList));
   }
 }
