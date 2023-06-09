@@ -15,6 +15,7 @@ class RegisterPage extends StatelessWidget {
   final _displayNameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
+  final _confirmPasswordCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,23 +53,29 @@ class RegisterPage extends StatelessWidget {
 
                     _getTextFormField(
                       context,
-                      label: UIString.DISPLAYNAME_TXT_FIELD,
                       controller: _displayNameCtrl,
+                      label: UIString.DISPLAYNAME_TXT_FIELD,
                     ),
                     _getTextFormField(
                       context,
+                      controller: _emailCtrl,
                       label: UIString.EMAIL_TXT_FIELD,
                       validator: TextFieldValidator.emailValidator,
-                      controller: _emailCtrl,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     _getTextFormField(
                       context,
-                      label: UIString.PSWD_TXT_FIELD,
                       controller: _passwordCtrl,
+                      label: UIString.PSWD_TXT_FIELD,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
                     ),
                     _getTextFormField(
                       context,
+                      controller: _confirmPasswordCtrl,
                       label: UIString.CONFIRM_PSWD_TXT_FIELD,
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
                     ),
 
                     const SizedBox(height: 5),
@@ -78,12 +85,27 @@ class RegisterPage extends StatelessWidget {
                       context,
                       label: UIString.REGISTER_BTN,
                       onTap: () async {
-                        if (_formKey.currentState!.validate()) {
-                          await AppAuth.register(
-                            _displayNameCtrl.text,
-                            _emailCtrl.text,
-                            _passwordCtrl.text,
-                          ).then((value) => Navigator.of(context).pop());
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        if (_passwordCtrl.text != _confirmPasswordCtrl.text) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: AppColors.ORANGE_FE7455,
+                              content: Text(
+                                  "Password does not match with confirm password."),
+                            ),
+                          );
+                        } else if (_formKey.currentState!.validate()) {
+                          try {
+                            await AppAuth.register(
+                              _displayNameCtrl.text,
+                              _emailCtrl.text,
+                              _passwordCtrl.text,
+                            ).then((value) => Navigator.of(context).pop());
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(e.toString()),
+                            ));
+                          }
                         } else {
                           Navigator.of(context).pop();
                         }
@@ -112,12 +134,16 @@ class RegisterPage extends StatelessWidget {
     required String label,
     TextEditingController? controller,
     String? Function(String?)? validator,
+    TextInputType? keyboardType,
+    bool? obscureText,
   }) {
     return Column(
       children: [
         TextFormField(
           controller: controller,
           validator: validator,
+          keyboardType: keyboardType,
+          obscureText: obscureText ?? false,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               vertical: 10,

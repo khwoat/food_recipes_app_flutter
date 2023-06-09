@@ -48,9 +48,9 @@ class AppAuth {
       await newUserDoc.set(user.toJson());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.WEAK_PASS_CODE) {
-        throw (AuthString.WEAK_PASS_TXT);
+        throw(AuthString.WEAK_PASS_TXT);
       } else if (e.code == AuthString.EMAIL_INUSE_CODE) {
-        throw (AuthString.EMAIL_INUSE_TXT);
+        throw(AuthString.EMAIL_INUSE_TXT);
       }
     }
   }
