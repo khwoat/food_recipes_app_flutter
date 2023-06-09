@@ -44,13 +44,12 @@ class AppAuth {
         favIds: [],
         recipeIds: [],
       );
-      final newUserDoc = db.collection(FirestoreString.USERS_COL).doc(cred.user?.uid);
+      final newUserDoc =
+          db.collection(FirestoreString.USERS_COL).doc(cred.user?.uid);
       await newUserDoc.set(user.toJson());
     } on FirebaseAuthException catch (e) {
-      if (e.code == AuthString.WEAK_PASS_CODE) {
-        throw(AuthString.WEAK_PASS_TXT);
-      } else if (e.code == AuthString.EMAIL_INUSE_CODE) {
-        throw(AuthString.EMAIL_INUSE_TXT);
+      if (e.code == AuthString.EMAIL_INUSE_CODE) {
+        throw (AuthString.EMAIL_INUSE_TXT);
       }
     }
   }

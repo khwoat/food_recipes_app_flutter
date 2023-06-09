@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 class UIString {
   UIString._();
@@ -10,7 +10,7 @@ class UIString {
   static const String FAVORITE_PAGE = "Favorite";
 
   // Label of text fields
-  static const String DISPLAYNAME_TXT_FIELD = "Username";
+  static const String USERNAME_TXT_FIELD = "Username";
   static const String EMAIL_TXT_FIELD = "Email";
   static const String PSWD_TXT_FIELD = "Password";
   static const String CONFIRM_PSWD_TXT_FIELD = "Confirm Password";
@@ -55,6 +55,12 @@ class FirestoreString {
 }
 
 class ValidatorString {
-  static const String FIELD_EMPTY = "Please enter.";
-  static const String NOT_MATCH_PATTERN = "Some letter is not appropiate.";
+  ValidatorString._();
+
+  static const String FIELD_EMPTY = "Please fill this field.";
+  static const String INVALID_PATTERN = "Some letter is not appropiate.";
+  static String INVALID_LENGTH(int min, int max) =>
+      "Password must in range $min - $max";
+  static const String PASSWORD_NOT_MATCH =
+      "Comfirm password does not match with password.";
 }

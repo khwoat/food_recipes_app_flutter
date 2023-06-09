@@ -12,7 +12,7 @@ class RegisterPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  final _displayNameCtrl = TextEditingController();
+  final _usernameCtrl = TextEditingController();
   final _emailCtrl = TextEditingController();
   final _passwordCtrl = TextEditingController();
   final _confirmPasswordCtrl = TextEditingController();
@@ -53,8 +53,9 @@ class RegisterPage extends StatelessWidget {
 
                     _getTextFormField(
                       context,
-                      controller: _displayNameCtrl,
-                      label: UIString.DISPLAYNAME_TXT_FIELD,
+                      controller: _usernameCtrl,
+                      label: UIString.USERNAME_TXT_FIELD,
+                      validator: TextFieldValidator.usernameValidator,
                     ),
                     _getTextFormField(
                       context,
@@ -67,6 +68,7 @@ class RegisterPage extends StatelessWidget {
                       context,
                       controller: _passwordCtrl,
                       label: UIString.PSWD_TXT_FIELD,
+                      validator: TextFieldValidator.passwordValidator,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                     ),
@@ -74,6 +76,11 @@ class RegisterPage extends StatelessWidget {
                       context,
                       controller: _confirmPasswordCtrl,
                       label: UIString.CONFIRM_PSWD_TXT_FIELD,
+                      validator: (value) =>
+                          TextFieldValidator.confirmPasswordValidator(
+                        value,
+                        _passwordCtrl,
+                      ),
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                     ),
@@ -86,18 +93,10 @@ class RegisterPage extends StatelessWidget {
                       label: UIString.REGISTER_BTN,
                       onTap: () async {
                         FocusManager.instance.primaryFocus?.unfocus();
-                        if (_passwordCtrl.text != _confirmPasswordCtrl.text) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: AppColors.ORANGE_FE7455,
-                              content: Text(
-                                  "Password does not match with confirm password."),
-                            ),
-                          );
-                        } else if (_formKey.currentState!.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           try {
                             await AppAuth.register(
-                              _displayNameCtrl.text,
+                              _usernameCtrl.text,
                               _emailCtrl.text,
                               _passwordCtrl.text,
                             ).then((value) => Navigator.of(context).pop());
@@ -106,8 +105,6 @@ class RegisterPage extends StatelessWidget {
                               content: Text(e.toString()),
                             ));
                           }
-                        } else {
-                          Navigator.of(context).pop();
                         }
                       },
                       buttonStyle: AppButtonStyle.ORANGE_BTN,
@@ -133,7 +130,7 @@ class RegisterPage extends StatelessWidget {
     BuildContext context, {
     required String label,
     TextEditingController? controller,
-    String? Function(String?)? validator,
+    String? Function(String? value)? validator,
     TextInputType? keyboardType,
     bool? obscureText,
   }) {
@@ -156,24 +153,34 @@ class RegisterPage extends StatelessWidget {
             floatingLabelStyle: AppTextStyle.F20_NORMAL.copyWith(
               color: AppColors.ORANGE_FE7455,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                color: AppColors.GREY_LIGHT,
-                width: 2,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(
-                color: AppColors.ORANGE_FE7455,
-                width: 2,
-              ),
-            ),
+            enabledBorder: regularFieldBorder(),
+            errorBorder: regularFieldBorder(),
+            focusedBorder: focusedFieldBorder(),
+            focusedErrorBorder: focusedFieldBorder(),
           ),
         ),
         const SizedBox(height: 10),
       ],
+    );
+  }
+
+  OutlineInputBorder regularFieldBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15),
+      borderSide: const BorderSide(
+        color: AppColors.GREY_LIGHT,
+        width: 2,
+      ),
+    );
+  }
+
+  OutlineInputBorder focusedFieldBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15),
+      borderSide: const BorderSide(
+        color: AppColors.ORANGE_FE7455,
+        width: 2,
+      ),
     );
   }
 
