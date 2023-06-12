@@ -83,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide: const BorderSide(
-                                    color: AppColors.GREY_LIGHT,
+                                    color: AppColors.LIGHT_GREY,
                                     width: 2,
                                   ),
                                 ),
@@ -100,7 +100,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   },
                   icon: Icon(
                     isShowSearchBox ? Icons.close : Icons.search,
-                    color: AppColors.GREY_DARK,
+                    color: AppColors.DARK_GREY,
                   ),
                 ),
               ],
@@ -156,7 +156,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Text(
         text,
         style: AppTextStyle.F18_NORMAL.copyWith(
-          color: AppColors.GREY_DARK,
+          color: AppColors.DARK_GREY,
         ),
       ),
     );

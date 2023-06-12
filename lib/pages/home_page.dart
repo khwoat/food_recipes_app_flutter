@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
         color: AppColors.WHITE,
         boxShadow: [
           BoxShadow(
-            color: AppColors.GREY_MED,
+            color: AppColors.MED_GREY,
             offset: Offset(1.5, 0),
             blurRadius: 8,
           )
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Icon(
           icon,
-          color: isSelected ? AppColors.WHITE : AppColors.GREY_DARK,
+          color: isSelected ? AppColors.WHITE : AppColors.DARK_GREY,
           size: 30,
         ),
       ),

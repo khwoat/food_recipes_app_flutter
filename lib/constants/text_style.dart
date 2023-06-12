@@ -7,7 +7,7 @@ class AppTextStyle {
   AppTextStyle._();
 
   static const TextStyle BASIC_FONT = TextStyle(
-    color: AppColors.GREY_DARK,
+    color: AppColors.DARK_GREY,
   );
 
   static final TextStyle F14_NORMAL = BASIC_FONT.copyWith(

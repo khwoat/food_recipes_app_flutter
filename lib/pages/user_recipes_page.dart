@@ -30,7 +30,7 @@ class _UserRecipesPageState extends State<UserRecipesPage> {
             Text(
               UIString.USER_RECIPES_HEADER,
               style: AppTextStyle.F22_BOLD.copyWith(
-                color: AppColors.GREY_DARK,
+                color: AppColors.DARK_GREY,
               ),
             ),
 

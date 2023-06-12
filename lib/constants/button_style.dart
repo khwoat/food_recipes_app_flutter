@@ -30,6 +30,6 @@ class AppButtonStyle {
 
   static final ButtonStyle WHITE_BTN = BASIC_BUTTON.copyWith(
     backgroundColor: const MaterialStatePropertyAll(AppColors.WHITE),
-    foregroundColor: const MaterialStatePropertyAll(AppColors.GREY_DARK),
+    foregroundColor: const MaterialStatePropertyAll(AppColors.DARK_GREY),
   );
 }

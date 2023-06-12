@@ -45,14 +45,14 @@ class _RecipeCardState extends State<RecipeCard> {
                         child: Text(
                           widget._recipeName,
                           style: AppTextStyle.F18_BOLD.copyWith(
-                            color: AppColors.GREY_DARK,
+                            color: AppColors.DARK_GREY,
                           ),
                         ),
                       ),
                       Text(
                         "by ${widget._username}",
                         style: AppTextStyle.F14_NORMAL.copyWith(
-                          color: AppColors.GREY_MED,
+                          color: AppColors.MED_GREY,
                         ),
                       ),
                     ],

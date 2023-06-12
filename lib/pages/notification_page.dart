@@ -26,7 +26,7 @@ class _NotificationPageState extends State<NotificationPage> {
             Text(
               UIString.NOTFICATION_HEADER,
               style: AppTextStyle.F22_BOLD.copyWith(
-                color: AppColors.GREY_DARK,
+                color: AppColors.DARK_GREY,
               ),
             ),
             const SizedBox(height: 5),
@@ -52,7 +52,7 @@ class _NotificationPageState extends State<NotificationPage> {
           title: Text(
             "Notiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
             style: AppTextStyle.F18_BOLD.copyWith(
-              color: AppColors.GREY_DARK,
+              color: AppColors.DARK_GREY,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -69,13 +69,13 @@ class _NotificationPageState extends State<NotificationPage> {
               Text(
                 "07:00 PM",
                 style: AppTextStyle.F14_NORMAL.copyWith(
-                  color: AppColors.GREY_DARK,
+                  color: AppColors.DARK_GREY,
                 ),
               ),
               Text(
                 "2022-02-01",
                 style: AppTextStyle.F14_NORMAL.copyWith(
-                  color: AppColors.GREY_DARK,
+                  color: AppColors.DARK_GREY,
                 ),
               ),
             ],
@@ -83,7 +83,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
         Container(
           height: 1.5,
-          color: AppColors.GREY_LIGHT,
+          color: AppColors.LIGHT_GREY,
         ),
       ],
     );

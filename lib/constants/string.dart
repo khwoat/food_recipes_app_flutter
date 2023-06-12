@@ -57,10 +57,10 @@ class FirestoreString {
 class ValidatorString {
   ValidatorString._();
 
-  static const String FIELD_EMPTY = "Please fill this field.";
-  static const String INVALID_PATTERN = "Some letter is not appropiate.";
+  static const String FIELD_EMPTY = "Please enter this field.";
+  static const String INVALID_PATTERN = "Incorrect patern or letters.";
   static String INVALID_LENGTH(int min, int max) =>
-      "Password must in range $min - $max";
+      "Password must in range $min - $max.";
   static const String PASSWORD_NOT_MATCH =
       "Comfirm password does not match with password.";
 }

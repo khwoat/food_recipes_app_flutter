@@ -34,7 +34,7 @@ class _AppCardState extends State<AppCard> {
       decoration: BoxDecoration(
         boxShadow: const [
           BoxShadow(
-            color: AppColors.GREY_MED,
+            color: AppColors.MED_GREY,
             blurRadius: 3,
             offset: Offset(0, 1.5),
           ),

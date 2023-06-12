@@ -65,7 +65,7 @@ class _FavoritePageState extends State<FavoritePage> {
             Text(
               UIString.FAV_HEADER,
               style: AppTextStyle.F22_BOLD.copyWith(
-                color: AppColors.GREY_DARK,
+                color: AppColors.DARK_GREY,
               ),
             ),
 

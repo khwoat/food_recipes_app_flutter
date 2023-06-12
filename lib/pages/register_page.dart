@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/firebase/auth.dart';
 import 'package:food_recipes_flutter/validators.dart';
+import 'package:food_recipes_flutter/widgets/app_snack_bar.dart';
 
 import '../constants/button_style.dart';
 import '../constants/string.dart';
@@ -99,11 +100,20 @@ class RegisterPage extends StatelessWidget {
                               _usernameCtrl.text,
                               _emailCtrl.text,
                               _passwordCtrl.text,
-                            ).then((value) => Navigator.of(context).pop());
+                            ).then((value) {
+                              Navigator.of(context).pop();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                AppSnackBar.build(
+                                  titleText: "Register succeed.",
+                                ),
+                              );
+                            });
                           } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(e.toString()),
-                            ));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              AppSnackBar.build(
+                                titleText: e.toString(),
+                              ),
+                            );
                           }
                         }
                       },
@@ -124,6 +134,16 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  SnackBar snackBar({required String titleText, Widget? leadingIcon}) {
+    return SnackBar(
+        content: Text(
+      titleText,
+      style: AppTextStyle.F18_BOLD.copyWith(
+        color: AppColors.WHITE,
+      ),
+    ));
   }
 
   Widget _getTextFormField(
@@ -148,7 +168,7 @@ class RegisterPage extends StatelessWidget {
             ),
             label: Text(label),
             labelStyle: AppTextStyle.F20_BOLD.copyWith(
-              color: AppColors.GREY_LIGHT,
+              color: AppColors.LIGHT_GREY,
             ),
             floatingLabelStyle: AppTextStyle.F20_NORMAL.copyWith(
               color: AppColors.ORANGE_FE7455,
@@ -168,7 +188,7 @@ class RegisterPage extends StatelessWidget {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
       borderSide: const BorderSide(
-        color: AppColors.GREY_LIGHT,
+        color: AppColors.LIGHT_GREY,
         width: 2,
       ),
     );
@@ -193,7 +213,7 @@ class RegisterPage extends StatelessWidget {
         Text(
           UIString.OR_DIVIDER,
           style: AppTextStyle.F20_BOLD.copyWith(
-            color: AppColors.GREY_MED,
+            color: AppColors.MED_GREY,
           ),
         ),
         _getSingleDivider(context),
@@ -205,7 +225,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       width: 90,
       height: 3,
-      color: AppColors.GREY_LIGHT,
+      color: AppColors.LIGHT_GREY,
     );
   }
 
