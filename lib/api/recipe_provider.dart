@@ -17,7 +17,11 @@ class RecipeProvider {
     for (QueryDocumentSnapshot<Map<String, dynamic>> e in snap.docs) {
       final detailSnap =
           await e.reference.collection(DbString.DETAIL_RECIPE_COL).get();
-      recipeList.add(Recipe.fromQuerySnapshot(e, detailSnap.docs));
+      recipeList.add(Recipe.fromQuerySnapshot(
+        recipeSnap: e,
+        detailSnapList: detailSnap.docs,
+        isFav: userData.favIds.contains(e.id),
+      ));
     }
     return recipeList;
   }
@@ -26,19 +30,5 @@ class RecipeProvider {
   static Future<List<String>> getDropdownItemList(String doc) async {
     final snap = await db.collection(DbString.DROPDOWN_COL).doc(doc).get();
     return (snap.data()?["list"] as List).map<String>((e) => e).toList();
-  }
-
-  // Get User Favorite recipes
-  static Future<List<Recipe>> getFavoriteList() async {
-    final List<Recipe> favList = [];
-    print(userData.favIds);
-    for (String id in userData.favIds) {
-      final snap = await db.collection(DbString.RECIPES_COL).doc(id).get();
-      final detailSnapList =
-          await snap.reference.collection(DbString.DETAIL_RECIPE_COL).get();
-      favList.add(Recipe.fromSnapshot(snap, detailSnapList.docs));
-    }
-
-    return favList;
   }
 }

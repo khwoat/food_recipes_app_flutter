@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
+import 'package:food_recipes_flutter/model/recipe.dart';
 
 import '../constants/colors.dart';
 import '../constants/text_style.dart';
@@ -6,17 +8,13 @@ import 'app_card.dart';
 
 // Reusable recipe card
 class RecipeCard extends StatefulWidget {
-  final String _recipeName;
-  final String _username;
-  final String? _imagePath;
   const RecipeCard(
-      {required String recipeName,
-      required String username,
-      String? imagePath,
-      super.key})
-      : _recipeName = recipeName,
-        _username = username,
-        _imagePath = imagePath;
+      {required Recipe recipe, required Function() onTapFav, super.key})
+      : _recipe = recipe,
+        _onTap = onTapFav;
+
+  final Recipe _recipe;
+  final Function() _onTap;
 
   @override
   State<RecipeCard> createState() => _RecipeCardState();
@@ -35,9 +33,10 @@ class _RecipeCardState extends State<RecipeCard> {
 
               SizedBox(
                 height: 120,
-                child: (widget._imagePath != null && widget._imagePath != "")
+                child: (widget._recipe.imageList.first != null &&
+                        widget._recipe.imageList.first != "")
                     ? Image.network(
-                        widget._imagePath ?? "",
+                        widget._recipe.imageList.first ?? "",
                         fit: BoxFit.cover,
                       )
                     : Image.asset(
@@ -52,14 +51,14 @@ class _RecipeCardState extends State<RecipeCard> {
                     children: [
                       Expanded(
                         child: Text(
-                          widget._recipeName,
+                          widget._recipe.recipeName,
                           style: AppTextStyle.F18_BOLD.copyWith(
                             color: AppColors.DARK_GREY,
                           ),
                         ),
                       ),
                       Text(
-                        "by ${widget._username}",
+                        "by ${widget._recipe.displayName}",
                         style: AppTextStyle.F14_NORMAL.copyWith(
                           color: AppColors.MED_GREY,
                         ),
@@ -72,13 +71,20 @@ class _RecipeCardState extends State<RecipeCard> {
           ),
 
           // Favorite icon
-          const Positioned(
+          Positioned(
             top: 8,
             right: 10,
-            child: Icon(
-              Icons.favorite_outline,
-              color: AppColors.WHITE,
-              size: 30,
+            child: GestureDetector(
+              onTap: widget._onTap,
+              child: Icon(
+                (widget._recipe.isFav)
+                    ? Icons.favorite
+                    : Icons.favorite_outline,
+                color: (widget._recipe.isFav)
+                    ? AppColors.ORANGE_FE7455
+                    : AppColors.WHITE,
+                size: 30,
+              ),
             ),
           ),
         ],

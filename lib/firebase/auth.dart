@@ -19,7 +19,7 @@ class AppAuth {
       );
       final uid = cred.user?.uid;
       final snap = await db.collection(DbString.USERS_COL).doc(uid).get();
-      userData = UserData.fromJson(snap.data());
+      userData = UserData.fromSnapshot(snap);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.USER_NOT_FOUND_CODE) {
         throw (AuthString.USER_NOT_FOUND_TXT);
@@ -43,6 +43,7 @@ class AppAuth {
         password: password,
       );
       final user = UserData(
+        id: cred.user?.uid ?? "",
         displayName: displayName,
         email: email,
         favIds: [],

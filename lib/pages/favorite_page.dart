@@ -66,9 +66,8 @@ class _FavoritePageState extends State<FavoritePage> {
                     itemBuilder: (context, index) {
                       final Recipe fav = state.favList[index];
                       return RecipeCard(
-                        recipeName: fav.recipeName,
-                        username: fav.username,
-                        imagePath: fav.imageList.first,
+                        recipe: fav,
+                        onTapFav: () => _favoriteListCubit.changeFav(fav),
                       );
                     },
                   );

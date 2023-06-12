@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:food_recipes_flutter/api/recipe_list_provider.dart';
-import 'package:food_recipes_flutter/firebase/auth.dart';
+import 'package:food_recipes_flutter/api/favorite_provider.dart';
 
 import '../../model/recipe.dart';
 
@@ -13,7 +11,14 @@ class FavoriteListCubit extends Cubit<FavoriteListState> {
 
   Future<void> getFavoriteList() async {
     emit(FavoriteListLoading());
-    final favList = await RecipeProvider.getFavoriteList();
+    final favList = await FavoriteProvider.getFavoriteList();
+    emit(FavoriteListAction(favList: favList));
+  }
+
+  Future<void> changeFav(Recipe recipe) async {
+    emit(FavoriteListLoading());
+    final newIsFav = !recipe.isFav;
+    final favList = await FavoriteProvider.changeFav(recipe, newIsFav);
     emit(FavoriteListAction(favList: favList));
   }
 }

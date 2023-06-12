@@ -50,9 +50,8 @@ class _UserRecipesPageState extends State<UserRecipesPage> {
                     itemBuilder: (context, index) {
                       final Recipe fav = state.favList[index];
                       return RecipeCard(
-                        recipeName: fav.recipeName,
-                        username: fav.username,
-                        imagePath: fav.imageList.first,
+                        recipe: fav,
+                        onTapFav: () {},
                       );
                     },
                   );

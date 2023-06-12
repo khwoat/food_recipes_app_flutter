@@ -5,6 +5,7 @@ class Recipe {
   late String _recipeName;
   late String _displayName;
   late int _cateId;
+  late bool _isFav;
   late int _favNum;
   late List<RecipeDetail> _detailList;
   late List<String?> _imageList;
@@ -14,6 +15,7 @@ class Recipe {
     required String recipeName,
     required String displayName,
     required int cateId,
+    required bool isFav,
     required int favNum,
     required List<RecipeDetail> detailList,
     required List<String> imageList,
@@ -21,13 +23,16 @@ class Recipe {
         _recipeName = recipeName,
         _displayName = displayName,
         _cateId = cateId,
+        _isFav = isFav,
         _favNum = favNum,
         _detailList = detailList,
         _imageList = imageList;
 
+  String get id => _id;
   String get recipeName => _recipeName;
-  String get username => _displayName;
+  String get displayName => _displayName;
   int get cateId => _cateId;
+  bool get isFav => _isFav;
   int get favNum => _favNum;
   List<RecipeDetail> get detailList => _detailList;
   List<String?> get imageList => _imageList;
@@ -37,20 +42,24 @@ class Recipe {
     _recipeName = json["recipeName"];
     _displayName = json["displayName"];
     _cateId = json["cateId"];
+    _isFav = json["isFav"];
     _favNum = json["favNum"];
     _detailList = json["detailList"];
     _imageList = json["imageList"];
   }
 
-  Recipe.fromQuerySnapshot(
-    QueryDocumentSnapshot<Map<String, dynamic>> recipeSnap,
-    List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
-  ) {
+  // Map data from QueryDocumentSnapshot
+  Recipe.fromQuerySnapshot({
+    required QueryDocumentSnapshot<Map<String, dynamic>> recipeSnap,
+    required List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
+    required bool isFav,
+  }) {
     final data = recipeSnap.data();
     _id = recipeSnap.id;
     _recipeName = data["recipeName"];
     _displayName = data["displayName"];
     _cateId = data["cateId"];
+    _isFav = isFav;
     _favNum = data["favNum"];
     _imageList =
         (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
@@ -59,16 +68,19 @@ class Recipe {
         detailSnapList.map((e) => RecipeDetail.fromSnapshot(e)).toList();
   }
 
-  Recipe.fromSnapshot(
-    DocumentSnapshot<Map<String, dynamic>> recipeSnap,
-    List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
-  ) {
+  // Map data from DocumentSnapshot
+  Recipe.fromSnapshot({
+    required DocumentSnapshot<Map<String, dynamic>> recipeSnap,
+    required List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
+    required bool isFav,
+  }) {
     final data = recipeSnap.data();
     _id = recipeSnap.id;
     if (data != null) {
       _recipeName = data["recipeName"];
       _displayName = data["displayName"];
       _cateId = data["cateId"];
+      _isFav = isFav;
       _favNum = data["favNum"];
       _imageList =
           (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
