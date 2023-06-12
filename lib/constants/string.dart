@@ -59,6 +59,9 @@ class FirestoreString {
   static const String DROPDOWN_COL = "dropdownItems";
   static const String CATEGORIES_DOC = "categories";
   static const String SORTING_DOC = "sorting";
+
+  static const String MF_SORT_VALUE = "Most Favorite";
+  static const String NAME_SORT_VALUE = "Name";
 }
 
 class ValidatorString {

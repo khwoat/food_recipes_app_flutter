@@ -16,9 +16,6 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final List<String> _categoryList = ["Category", "Boiled"];
-  final List<String> _sortingList = ["Sorting", "Popularity", "Name"];
-
   final DropdownCubit _cateDropdownCubit = DropdownCubit();
   final DropdownCubit _sortDropdownCubit = DropdownCubit();
   late final RecipeListCubit _recipesCubit;
@@ -91,6 +88,7 @@ class _DashboardPageState extends State<DashboardPage> {
             // Recipe card grid view
             Expanded(
               child: BlocBuilder<RecipeListCubit, RecipeListState>(
+                bloc: _recipesCubit,
                 builder: (context, state) {
                   return GridView.builder(
                     gridDelegate:
@@ -158,13 +156,16 @@ class _DashboardPageState extends State<DashboardPage> {
         BlocBuilder<DropdownCubit, DropdownState>(
           bloc: _cateDropdownCubit,
           builder: (context, state) {
-            return _getDropdownButton(
-              context,
-              value: state.selectedValue,
-              valueList: state.valueList,
-              onChanged: (value) =>
-                  _cateDropdownCubit.selectNewValue(value ?? 0),
-            );
+            return _getDropdownButton(context,
+                value: state.selectedValue,
+                valueList: state.valueList, onChanged: (value) {
+              _cateDropdownCubit.selectNewValue(value ?? 0);
+              _recipesCubit.filterRecipes(
+                cateId: value ?? 0,
+                sortId: _sortDropdownCubit.state.selectedValue,
+                sortingList: _sortDropdownCubit.state.valueList,
+              );
+            });
           },
         ),
         const SizedBox(width: 10),
@@ -177,8 +178,14 @@ class _DashboardPageState extends State<DashboardPage> {
               context,
               value: state.selectedValue,
               valueList: state.valueList,
-              onChanged: (value) =>
-                  _sortDropdownCubit.selectNewValue(value ?? 0),
+              onChanged: (value) {
+                _sortDropdownCubit.selectNewValue(value ?? 0);
+                _recipesCubit.filterRecipes(
+                  cateId: _cateDropdownCubit.state.selectedValue,
+                  sortId: value ?? 0,
+                  sortingList: state.valueList,
+                );
+              },
             );
           },
         ),

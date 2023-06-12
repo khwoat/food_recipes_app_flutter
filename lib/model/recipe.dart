@@ -5,6 +5,7 @@ class Recipe {
   late String _recipeName;
   late String _displayName;
   late int _cateId;
+  late int _favNum;
   late List<RecipeDetail> _detailList;
   late List<String?> _imageList;
 
@@ -13,18 +14,21 @@ class Recipe {
     required String recipeName,
     required String displayName,
     required int cateId,
+    required int favNum,
     required List<RecipeDetail> detailList,
     required List<String> imageList,
   })  : _id = id,
         _recipeName = recipeName,
         _displayName = displayName,
         _cateId = cateId,
+        _favNum = favNum,
         _detailList = detailList,
         _imageList = imageList;
 
   String get recipeName => _recipeName;
   String get username => _displayName;
   int get cateId => _cateId;
+  int get favNum => _favNum;
   List<RecipeDetail> get detailList => _detailList;
   List<String?> get imageList => _imageList;
 
@@ -33,6 +37,7 @@ class Recipe {
     _recipeName = json["recipeName"];
     _displayName = json["displayName"];
     _cateId = json["cateId"];
+    _favNum = json["favNum"];
     _detailList = json["detailList"];
     _imageList = json["imageList"];
   }
@@ -46,6 +51,7 @@ class Recipe {
     _recipeName = data["recipeName"];
     _displayName = data["displayName"];
     _cateId = data["cateId"];
+    _favNum = data["favNum"];
     _imageList =
         (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
 
@@ -59,6 +65,7 @@ class Recipe {
     map["recipeName"] = _recipeName;
     map["displayName"] = _displayName;
     map["cateId"] = _cateId;
+    map["favNum"] = _favNum;
     map["detailList"] = _detailList;
     map["imageList"] = _imageList;
     return map;

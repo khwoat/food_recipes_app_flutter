@@ -19,7 +19,9 @@ abstract class RecipeListState extends Equatable {
 
 class RecipeListInitial extends RecipeListState {}
 
-class RecipeListLoading extends RecipeListState {}
+class RecipeListLoading extends RecipeListState {
+  const RecipeListLoading({super.recipeList});
+}
 
 class RecipeListAction extends RecipeListState {
   const RecipeListAction({required super.recipeList});
