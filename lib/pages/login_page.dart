@@ -3,12 +3,25 @@ import 'package:food_recipes_flutter/constants/button_style.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
+import 'package:food_recipes_flutter/firebase/auth.dart';
 import 'package:food_recipes_flutter/route.dart';
+import 'package:food_recipes_flutter/validators.dart';
+import 'package:food_recipes_flutter/widgets/app_snack_bar.dart';
 
 import '../widgets/app_card.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _emailTxtCtrl = TextEditingController();
+  final _passTxtCtrl = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +58,19 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _getTextFormField(BuildContext context, String label) {
+  Widget _getTextFormField(
+    BuildContext context, {
+    required String label,
+    TextEditingController? controller,
+    String? Function(String? value)? validator,
+    TextInputType? keyboardType,
+    bool? obscureText,
+  }) {
     return TextFormField(
+      controller: controller,
+      validator: validator,
+      keyboardType: keyboardType,
+      obscureText: obscureText ?? false,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           vertical: 20,
@@ -59,20 +83,32 @@ class LoginPage extends StatelessWidget {
         floatingLabelStyle: AppTextStyle.F20_NORMAL.copyWith(
           color: AppColors.ORANGE_FE7455,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(
-            color: AppColors.LIGHT_GREY,
-            width: 2,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(
-            color: AppColors.ORANGE_FE7455,
-            width: 2,
-          ),
-        ),
+        enabledBorder: normalFieldBorder(),
+        errorBorder: normalFieldBorder(),
+        focusedBorder: focusedFieldBorder(),
+        focusedErrorBorder: focusedFieldBorder(),
+      ),
+    );
+  }
+
+  // Normal field
+  OutlineInputBorder normalFieldBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15),
+      borderSide: const BorderSide(
+        color: AppColors.LIGHT_GREY,
+        width: 2,
+      ),
+    );
+  }
+
+  // Focused field
+  OutlineInputBorder focusedFieldBorder() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15),
+      borderSide: const BorderSide(
+        color: AppColors.ORANGE_FE7455,
+        width: 2,
       ),
     );
   }
@@ -80,21 +116,48 @@ class LoginPage extends StatelessWidget {
   // Login form (by email and password)
   Widget _getEmailPswdForm(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
-          _getTextFormField(context, UIString.EMAIL_TXT_FIELD),
+          _getTextFormField(
+            context,
+            label: UIString.EMAIL_TXT_FIELD,
+            controller: _emailTxtCtrl,
+            validator: TextFieldValidator.emailValidator,
+          ),
           const SizedBox(height: 10),
-          _getTextFormField(context, UIString.PSWD_TXT_FIELD),
+          _getTextFormField(
+            context,
+            label: UIString.PSWD_TXT_FIELD,
+            controller: _passTxtCtrl,
+            validator: TextFieldValidator.passwordValidator,
+            obscureText: true,
+          ),
           const SizedBox(height: 15),
           // Login btn
           _getButton(
             context,
             label: UIString.LOGIN_BTN,
             buttonStyle: AppButtonStyle.ORANGE_BTN,
-            onTap: () => Navigator.popAndPushNamed(
-              context,
-              AppRoute.HOME_PAGE,
-            ),
+            onTap: () async {
+              FocusManager.instance.primaryFocus?.unfocus();
+              if (_formKey.currentState!.validate()) {
+                try {
+                  await AppAuth.login(
+                    _emailTxtCtrl.text,
+                    _passTxtCtrl.text,
+                  ).then((value) {
+                    Navigator.of(context).popAndPushNamed(
+                      AppRoute.HOME_PAGE,
+                    );
+                  });
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    AppSnackBar.build(titleText: e.toString()),
+                  );
+                }
+              }
+            },
           ),
         ],
       ),

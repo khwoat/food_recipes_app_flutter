@@ -173,8 +173,8 @@ class RegisterPage extends StatelessWidget {
             floatingLabelStyle: AppTextStyle.F20_NORMAL.copyWith(
               color: AppColors.ORANGE_FE7455,
             ),
-            enabledBorder: regularFieldBorder(),
-            errorBorder: regularFieldBorder(),
+            enabledBorder: normalFieldBorder(),
+            errorBorder: normalFieldBorder(),
             focusedBorder: focusedFieldBorder(),
             focusedErrorBorder: focusedFieldBorder(),
           ),
@@ -184,7 +184,8 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder regularFieldBorder() {
+  // Normal field
+  OutlineInputBorder normalFieldBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
       borderSide: const BorderSide(
@@ -194,6 +195,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
+  // Focused field
   OutlineInputBorder focusedFieldBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
