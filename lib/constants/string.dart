@@ -52,6 +52,9 @@ class AuthString {
 class FirestoreString {
   // Collection
   static const String USERS_COL = "users";
+
+  static const String RECIPES_COL = "recipes";
+  static const String DETAIL_RECIPE_COL = "detailList";
 }
 
 class ValidatorString {

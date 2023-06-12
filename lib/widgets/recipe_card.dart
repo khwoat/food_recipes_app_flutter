@@ -32,13 +32,22 @@ class _RecipeCardState extends State<RecipeCard> {
           Column(
             children: [
               // Recipe banner
-              Image.asset(
-                widget._imagePath ?? "",
-                fit: BoxFit.cover,
+
+              SizedBox(
+                height: 120,
+                child: (widget._imagePath != null && widget._imagePath != "")
+                    ? Image.network(
+                        widget._imagePath ?? "",
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        "images/tom_yum_kung.webp",
+                        fit: BoxFit.cover,
+                      ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Column(
                     children: [
                       Expanded(

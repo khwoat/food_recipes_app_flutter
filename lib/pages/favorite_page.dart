@@ -18,6 +18,7 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   final List<Recipe> _recipeList = [
     Recipe(
+      id: "abc",
       recipeName: "Tom yum kung",
       displayName: "Josh",
       detailList: [
@@ -26,6 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
       imageList: ["images/tom_yum_kung.webp"],
     ),
     Recipe(
+      id: "abc",
       recipeName: "Pad Thai",
       displayName: "David",
       detailList: [

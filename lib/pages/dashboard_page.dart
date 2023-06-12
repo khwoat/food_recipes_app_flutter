@@ -18,25 +18,6 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<String> _categoryList = ["Category", "Boiled"];
   final List<String> _sortingList = ["Sorting", "Popularity", "Name"];
 
-  final List<Recipe> _recipeList = [
-    Recipe(
-      recipeName: "Tom yum kung",
-      displayName: "Josh",
-      detailList: [
-        RecipeDetail(index: 1, description: "description1"),
-      ],
-      imageList: ["images/tom_yum_kung.webp"],
-    ),
-    Recipe(
-      recipeName: "Pad Thai",
-      displayName: "David",
-      detailList: [
-        RecipeDetail(index: 1, description: "description1"),
-      ],
-      imageList: ["images/tom_yum_kung.webp"],
-    ),
-  ];
-
   final DropdownCubit _cateDropdownCubit = DropdownCubit();
   final DropdownCubit _sortDropdownCubit = DropdownCubit();
   late final RecipeListCubit _recipesCubit;
@@ -54,7 +35,7 @@ class _DashboardPageState extends State<DashboardPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _cateDropdownCubit.init(_categoryList);
       _sortDropdownCubit.init(_sortingList);
-      _recipesCubit.init(_recipeList);
+      _recipesCubit.getRecipeList();
     });
     super.initState();
   }
