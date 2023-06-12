@@ -38,9 +38,9 @@ class RecipeListCubit extends Cubit<RecipeListState> {
 
     // Sorting
     if (sortId != 0) {
-      if (sortingList[sortId] == FirestoreString.MF_SORT_VALUE) {
+      if (sortingList[sortId] == DbString.MF_SORT_VALUE) {
         newList.sort((a, b) => b.favNum - a.favNum);
-      } else if (sortingList[sortId] == FirestoreString.NAME_SORT_VALUE) {
+      } else if (sortingList[sortId] == DbString.NAME_SORT_VALUE) {
         newList.sort((a, b) => a.recipeName.compareTo(b.recipeName));
       }
     }

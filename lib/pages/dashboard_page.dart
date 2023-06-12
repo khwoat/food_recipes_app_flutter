@@ -31,8 +31,8 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _cateDropdownCubit.getValueList(FirestoreString.CATEGORIES_DOC);
-      _sortDropdownCubit.getValueList(FirestoreString.SORTING_DOC);
+      _cateDropdownCubit.getValueList(DbString.CATEGORIES_DOC);
+      _sortDropdownCubit.getValueList(DbString.SORTING_DOC);
       _recipesCubit.getRecipeList();
     });
     super.initState();

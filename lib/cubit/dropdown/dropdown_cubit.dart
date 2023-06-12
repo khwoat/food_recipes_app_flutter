@@ -20,13 +20,13 @@ class DropdownCubit extends Cubit<DropdownState> {
     emit(DropdownLoading());
 
     List<String> valueList = [];
-    if (doc == FirestoreString.CATEGORIES_DOC) {
+    if (doc == DbString.CATEGORIES_DOC) {
       valueList = await RecipeProvider.getDropdownItemList(
-        FirestoreString.CATEGORIES_DOC,
+        DbString.CATEGORIES_DOC,
       );
-    } else if (doc == FirestoreString.SORTING_DOC) {
+    } else if (doc == DbString.SORTING_DOC) {
       valueList = await RecipeProvider.getDropdownItemList(
-        FirestoreString.SORTING_DOC,
+        DbString.SORTING_DOC,
       );
     }
 

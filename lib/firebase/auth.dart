@@ -18,8 +18,7 @@ class AppAuth {
         password: password,
       );
       final uid = cred.user?.uid;
-      final snap =
-          await db.collection(FirestoreString.USERS_COL).doc(uid).get();
+      final snap = await db.collection(DbString.USERS_COL).doc(uid).get();
       userData = UserData.fromJson(snap.data());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.USER_NOT_FOUND_CODE) {
@@ -49,8 +48,7 @@ class AppAuth {
         favIds: [],
         recipeIds: [],
       );
-      final newUserDoc =
-          db.collection(FirestoreString.USERS_COL).doc(cred.user?.uid);
+      final newUserDoc = db.collection(DbString.USERS_COL).doc(cred.user?.uid);
       await newUserDoc.set(user.toJson());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.EMAIL_INUSE_CODE) {

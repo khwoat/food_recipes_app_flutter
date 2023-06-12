@@ -1,19 +1,19 @@
 class UserData {
   late String _displayName;
   late String _email;
-  late List<dynamic> _favIds;
-  late List<dynamic> _recipeIds;
+  late List<String> _favIds;
+  late List<String> _recipeIds;
 
   String get displayName => _displayName;
   String get email => _email;
-  List<dynamic> get favIds => _favIds;
-  List<dynamic> get recipeIds => _recipeIds;
+  List<String> get favIds => _favIds;
+  List<String> get recipeIds => _recipeIds;
 
   UserData({
     required String displayName,
     required String email,
-    required List<int> favIds,
-    required List<int> recipeIds,
+    required List<String> favIds,
+    required List<String> recipeIds,
   })  : _displayName = displayName,
         _email = email,
         _favIds = favIds,
@@ -29,8 +29,8 @@ class UserData {
   UserData.fromJson(dynamic json) {
     _displayName = json["displayName"];
     _email = json["email"];
-    _favIds = json["favIds"];
-    _recipeIds = json["recipeIds"];
+    _favIds = (json["favIds"] as List).map<String>((e) => e).toList();
+    _recipeIds = (json["recipeIds"] as List).map<String>((e) => e).toList();
   }
 
   Map<String, dynamic> toJson() {

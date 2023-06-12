@@ -42,7 +42,7 @@ class Recipe {
     _imageList = json["imageList"];
   }
 
-  Recipe.fromSnapshot(
+  Recipe.fromQuerySnapshot(
     QueryDocumentSnapshot<Map<String, dynamic>> recipeSnap,
     List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
   ) {
@@ -57,6 +57,25 @@ class Recipe {
 
     _detailList =
         detailSnapList.map((e) => RecipeDetail.fromSnapshot(e)).toList();
+  }
+
+  Recipe.fromSnapshot(
+    DocumentSnapshot<Map<String, dynamic>> recipeSnap,
+    List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
+  ) {
+    final data = recipeSnap.data();
+    _id = recipeSnap.id;
+    if (data != null) {
+      _recipeName = data["recipeName"];
+      _displayName = data["displayName"];
+      _cateId = data["cateId"];
+      _favNum = data["favNum"];
+      _imageList =
+          (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
+
+      _detailList =
+          detailSnapList.map((e) => RecipeDetail.fromSnapshot(e)).toList();
+    }
   }
 
   Map<String, dynamic> toJson() {

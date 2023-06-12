@@ -16,31 +16,6 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  final List<Recipe> _recipeList = [
-    Recipe(
-      id: "abc",
-      recipeName: "Tom yum kung",
-      displayName: "Josh",
-      cateId: 0,
-      favNum: 0,
-      detailList: [
-        RecipeDetail(index: 1, description: "description1"),
-      ],
-      imageList: ["images/tom_yum_kung.webp"],
-    ),
-    Recipe(
-      id: "abc",
-      recipeName: "Pad Thai",
-      displayName: "David",
-      cateId: 0,
-      favNum: 0,
-      detailList: [
-        RecipeDetail(index: 1, description: "description1"),
-      ],
-      imageList: ["images/tom_yum_kung.webp"],
-    ),
-  ];
-
   late final FavoriteListCubit _favoriteListCubit;
 
   @override
@@ -52,7 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _favoriteListCubit.init(_recipeList);
+      _favoriteListCubit.getFavoriteList();
     });
     super.initState();
   }

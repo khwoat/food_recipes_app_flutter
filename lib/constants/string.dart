@@ -49,7 +49,7 @@ class AuthString {
   static const String EMAIL_INUSE_TXT = "Email is already in use";
 }
 
-class FirestoreString {
+class DbString {
   // Collection
   static const String USERS_COL = "users";
 

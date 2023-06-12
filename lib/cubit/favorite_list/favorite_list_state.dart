@@ -15,3 +15,9 @@ abstract class FavoriteListState extends Equatable {
 class FavoriteListInitial extends FavoriteListState {
   const FavoriteListInitial({super.favList});
 }
+
+class FavoriteListLoading extends FavoriteListState {}
+
+class FavoriteListAction extends FavoriteListState {
+  const FavoriteListAction({super.favList});
+}
