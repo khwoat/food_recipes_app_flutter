@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipes_flutter/constants/button_style.dart';
+import 'package:food_recipes_flutter/firebase/auth.dart';
 
 import '../constants/colors.dart';
 import '../constants/string.dart';
@@ -80,16 +81,16 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 20),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Thiwakorn Srimoo",
+                  AppAuth.userData.displayName,
                   style: AppTextStyle.F20_BOLD.copyWith(
                     color: AppColors.ORANGE_FE7455,
                   ),
                 ),
                 Text(
-                  "thiwakorn.srimo@gmail.com",
+                  AppAuth.userData.email,
                   style: AppTextStyle.F14_NORMAL,
                 ),
               ],

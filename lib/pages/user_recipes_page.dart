@@ -5,7 +5,7 @@ import '../constants/colors.dart';
 import '../constants/string.dart';
 import '../constants/text_style.dart';
 import '../cubit/favorite_list/favorite_list_cubit.dart';
-import '../model/recipe_list.dart';
+import '../model/recipe.dart';
 import '../widgets/recipe_card.dart';
 
 class UserRecipesPage extends StatefulWidget {

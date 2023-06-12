@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:food_recipes_flutter/model/recipe_list.dart';
+import 'package:food_recipes_flutter/model/recipe.dart';
 
 part 'recipe_list_state.dart';
 

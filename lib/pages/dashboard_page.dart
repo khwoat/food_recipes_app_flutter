@@ -5,7 +5,7 @@ import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 import '../cubit/dropdown/dropdown_cubit.dart';
 import '../cubit/recipe_list/recipe_list_cubit.dart';
-import '../model/recipe_list.dart';
+import '../model/recipe.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -21,7 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Recipe> _recipeList = [
     Recipe(
       recipeName: "Tom yum kung",
-      username: "Josh",
+      displayName: "Josh",
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],
@@ -29,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage> {
     ),
     Recipe(
       recipeName: "Pad Thai",
-      username: "David",
+      displayName: "David",
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],

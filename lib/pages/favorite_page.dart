@@ -6,7 +6,7 @@ import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 
-import '../model/recipe_list.dart';
+import '../model/recipe.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -19,7 +19,7 @@ class _FavoritePageState extends State<FavoritePage> {
   final List<Recipe> _recipeList = [
     Recipe(
       recipeName: "Tom yum kung",
-      username: "Josh",
+      displayName: "Josh",
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],
@@ -27,7 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
     ),
     Recipe(
       recipeName: "Pad Thai",
-      username: "David",
+      displayName: "David",
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],

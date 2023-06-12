@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../model/recipe_list.dart';
+import '../../model/recipe.dart';
 
 part 'favorite_list_state.dart';
 

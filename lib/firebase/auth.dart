@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AppAuth {
   static final db = FirebaseFirestore.instance;
 
+  static UserData userData = UserData.defaultValue();
+
   /*
    * Login function
    */
@@ -15,7 +17,10 @@ class AppAuth {
         email: email,
         password: password,
       );
-      // final userMap = UserData(username: cred.user?.displayName ?? "", email: email, favIds: favIds, recipeIds: recipeIds);
+      final uid = cred.user?.uid;
+      final snap =
+          await db.collection(FirestoreString.USERS_COL).doc(uid).get();
+      userData = UserData.fromJson(snap.data());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.USER_NOT_FOUND_CODE) {
         throw (AuthString.USER_NOT_FOUND_TXT);

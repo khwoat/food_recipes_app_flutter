@@ -1,13 +1,13 @@
 class UserData {
   late String _displayName;
   late String _email;
-  late List<int> _favIds;
-  late List<int> _recipeIds;
+  late List<dynamic> _favIds;
+  late List<dynamic> _recipeIds;
 
   String get displayName => _displayName;
   String get email => _email;
-  List<int> get favIds => _favIds;
-  List<int> get recipeIds => _recipeIds;
+  List<dynamic> get favIds => _favIds;
+  List<dynamic> get recipeIds => _recipeIds;
 
   UserData({
     required String displayName,
@@ -18,6 +18,13 @@ class UserData {
         _email = email,
         _favIds = favIds,
         _recipeIds = recipeIds;
+
+  UserData.defaultValue() {
+    _displayName = "";
+    _email = "";
+    _favIds = [];
+    _recipeIds = [];
+  }
 
   UserData.fromJson(dynamic json) {
     _displayName = json["displayName"];
