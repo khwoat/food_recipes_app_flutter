@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_recipes_flutter/constants/string.dart';
 
 class Recipe {
   late String _id;
   late String _recipeName;
   late String _displayName;
+  late int _cateId;
   late List<RecipeDetail> _detailList;
   late List<String?> _imageList;
 
@@ -12,16 +12,19 @@ class Recipe {
     required String id,
     required String recipeName,
     required String displayName,
+    required int cateId,
     required List<RecipeDetail> detailList,
     required List<String> imageList,
   })  : _id = id,
         _recipeName = recipeName,
         _displayName = displayName,
+        _cateId = cateId,
         _detailList = detailList,
         _imageList = imageList;
 
   String get recipeName => _recipeName;
   String get username => _displayName;
+  int get cateId => _cateId;
   List<RecipeDetail> get detailList => _detailList;
   List<String?> get imageList => _imageList;
 
@@ -29,6 +32,7 @@ class Recipe {
     _id = json["id"];
     _recipeName = json["recipeName"];
     _displayName = json["displayName"];
+    _cateId = json["cateId"];
     _detailList = json["detailList"];
     _imageList = json["imageList"];
   }
@@ -41,6 +45,7 @@ class Recipe {
     _id = recipeSnap.id;
     _recipeName = data["recipeName"];
     _displayName = data["displayName"];
+    _cateId = data["cateId"];
     _imageList =
         (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
 
@@ -53,6 +58,7 @@ class Recipe {
     map["id"] = _id;
     map["recipeName"] = _recipeName;
     map["displayName"] = _displayName;
+    map["cateId"] = _cateId;
     map["detailList"] = _detailList;
     map["imageList"] = _imageList;
     return map;

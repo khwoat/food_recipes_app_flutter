@@ -55,6 +55,10 @@ class FirestoreString {
 
   static const String RECIPES_COL = "recipes";
   static const String DETAIL_RECIPE_COL = "detailList";
+
+  static const String DROPDOWN_COL = "dropdownItems";
+  static const String CATEGORIES_DOC = "categories";
+  static const String SORTING_DOC = "sorting";
 }
 
 class ValidatorString {

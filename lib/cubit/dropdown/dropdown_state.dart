@@ -2,24 +2,24 @@ part of 'dropdown_cubit.dart';
 
 @immutable
 abstract class DropdownState extends Equatable {
-  final String? _selectedValue;
+  final int? _selectedValue;
   final List<String>? _valueList;
   const DropdownState({
-    String? selectedValue,
+    int? selectedValue,
     List<String>? valueList,
   })  : _selectedValue = selectedValue,
         _valueList = valueList;
 
-  String get selectedValue => _selectedValue ?? "";
+  int get selectedValue => _selectedValue ?? 0;
   List<String> get valueList => _valueList ?? [];
 
   @override
   List<Object?> get props => [_selectedValue, _valueList];
 }
 
-class DropdownInitial extends DropdownState {
-  const DropdownInitial({super.selectedValue, super.valueList});
-}
+class DropdownInitial extends DropdownState {}
+
+class DropdownLoading extends DropdownState {}
 
 class DropdownAction extends DropdownState {
   const DropdownAction({

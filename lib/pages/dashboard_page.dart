@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
+import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 import '../cubit/dropdown/dropdown_cubit.dart';
@@ -33,8 +34,8 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _cateDropdownCubit.init(_categoryList);
-      _sortDropdownCubit.init(_sortingList);
+      _cateDropdownCubit.getValueList(FirestoreString.CATEGORIES_DOC);
+      _sortDropdownCubit.getValueList(FirestoreString.SORTING_DOC);
       _recipesCubit.getRecipeList();
     });
     super.initState();
@@ -119,23 +120,29 @@ class _DashboardPageState extends State<DashboardPage> {
   // Dropdown btn for "Category" and "Sorting"
   Widget _getDropdownButton(
     BuildContext context, {
-    required String value,
+    required int value,
     required List<String> valueList,
-    required void Function(String? value) onChanged,
+    required void Function(int? value) onChanged,
   }) {
-    return DropdownButton<String>(
+    return DropdownButton<int>(
       value: value,
       onChanged: onChanged,
       underline: Container(),
-      items: valueList.map((e) => _getDropdownItem(context, e)).toList(),
+      items: valueList
+          .map((e) => _getDropdownItem(context, valueList.indexOf(e), e))
+          .toList(),
     );
   }
 
-  DropdownMenuItem<String> _getDropdownItem(BuildContext context, String text) {
+  DropdownMenuItem<int> _getDropdownItem(
+    BuildContext context,
+    int id,
+    String value,
+  ) {
     return DropdownMenuItem(
-      value: text,
+      value: id,
       child: Text(
-        text,
+        value,
         style: AppTextStyle.F18_NORMAL.copyWith(
           color: AppColors.DARK_GREY,
         ),
@@ -156,7 +163,7 @@ class _DashboardPageState extends State<DashboardPage> {
               value: state.selectedValue,
               valueList: state.valueList,
               onChanged: (value) =>
-                  _cateDropdownCubit.selectNewValue(value ?? ""),
+                  _cateDropdownCubit.selectNewValue(value ?? 0),
             );
           },
         ),
@@ -171,7 +178,7 @@ class _DashboardPageState extends State<DashboardPage> {
               value: state.selectedValue,
               valueList: state.valueList,
               onChanged: (value) =>
-                  _sortDropdownCubit.selectNewValue(value ?? ""),
+                  _sortDropdownCubit.selectNewValue(value ?? 0),
             );
           },
         ),

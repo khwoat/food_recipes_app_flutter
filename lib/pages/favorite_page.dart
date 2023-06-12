@@ -21,6 +21,7 @@ class _FavoritePageState extends State<FavoritePage> {
       id: "abc",
       recipeName: "Tom yum kung",
       displayName: "Josh",
+      cateId: 0,
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],
@@ -30,6 +31,7 @@ class _FavoritePageState extends State<FavoritePage> {
       id: "abc",
       recipeName: "Pad Thai",
       displayName: "David",
+      cateId: 0,
       detailList: [
         RecipeDetail(index: 1, description: "description1"),
       ],

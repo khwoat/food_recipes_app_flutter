@@ -1,21 +1,39 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:food_recipes_flutter/api/recipe_list_provider.dart';
+import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:meta/meta.dart';
 
 part 'dropdown_state.dart';
 
 class DropdownCubit extends Cubit<DropdownState> {
-  DropdownCubit() : super(const DropdownInitial());
+  DropdownCubit() : super(DropdownInitial());
 
-  void init(List<String>? valueList) {
-    emit(DropdownInitial(
-      selectedValue: valueList?.first,
+  void init(List<String> valueList) {
+    emit(DropdownAction(
+      selectedValue: 0,
       valueList: valueList,
     ));
   }
 
-  void selectNewValue(String value) {
-    emit(DropdownAction(
-        selectedValue: value, valueList: state.valueList));
+  Future<void> getValueList(String doc) async {
+    emit(DropdownLoading());
+
+    List<String> valueList = [];
+    if (doc == FirestoreString.CATEGORIES_DOC) {
+      valueList = await RecipeProvider.getDropdownItemList(
+        FirestoreString.CATEGORIES_DOC,
+      );
+    } else if (doc == FirestoreString.SORTING_DOC) {
+      valueList = await RecipeProvider.getDropdownItemList(
+        FirestoreString.SORTING_DOC,
+      );
+    }
+
+    emit(DropdownAction(selectedValue: 0, valueList: valueList));
+  }
+
+  void selectNewValue(int value) {
+    emit(DropdownAction(selectedValue: value, valueList: state.valueList));
   }
 }

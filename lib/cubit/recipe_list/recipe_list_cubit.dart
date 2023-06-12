@@ -11,7 +11,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   Future<void> getRecipeList() async {
     emit(RecipeListLoading());
 
-    final recipeList = await RecipeListProvider.getRecipeList();
+    final recipeList = await RecipeProvider.getRecipeList();
 
     emit(RecipeListAction(recipeList: recipeList));
   }
