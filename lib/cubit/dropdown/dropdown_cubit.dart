@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:food_recipes_flutter/api/recipe_provider.dart';
+import 'package:food_recipes_flutter/repository/recipe_repository.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:meta/meta.dart';
 
@@ -21,11 +21,11 @@ class DropdownCubit extends Cubit<DropdownState> {
 
     List<String> valueList = [];
     if (doc == DbString.CATEGORIES_DOC) {
-      valueList = await RecipeProvider.getDropdownItemList(
+      valueList = await RecipeRepository.getDropdownItemList(
         DbString.CATEGORIES_DOC,
       );
     } else if (doc == DbString.SORTING_DOC) {
-      valueList = await RecipeProvider.getDropdownItemList(
+      valueList = await RecipeRepository.getDropdownItemList(
         DbString.SORTING_DOC,
       );
     }

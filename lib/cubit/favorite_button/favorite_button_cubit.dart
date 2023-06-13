@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../api/favorite_provider.dart';
+import '../../repository/favorite_repository.dart';
 import '../../model/recipe.dart';
 
 part 'favorite_button_state.dart';
@@ -13,7 +13,7 @@ class FavoriteButtonCubit extends Cubit<FavoriteButtonState> {
   Future<void> changeFav(Recipe recipe, bool isFav) async {
     emit(const FavoriteButtonLoading());
     final newIsFav = !isFav;
-    await FavoriteProvider.changeFav(recipe, newIsFav);
+    await FavoriteRepository.changeFav(recipe, newIsFav);
     emit(FavoriteButtonAction(isFav: newIsFav));
   }
 }

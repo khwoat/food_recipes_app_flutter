@@ -5,8 +5,8 @@ import '../constants/string.dart';
 import '../firebase/auth.dart';
 import '../model/recipe.dart';
 
-class FavoriteProvider {
-  FavoriteProvider._();
+class FavoriteRepository {
+  FavoriteRepository._();
 
   static final _db = FirebaseFirestore.instance;
   static final _userData = AppAuth.userData;

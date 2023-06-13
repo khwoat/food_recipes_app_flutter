@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:food_recipes_flutter/api/recipe_provider.dart';
+import 'package:food_recipes_flutter/repository/recipe_repository.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/model/recipe.dart';
 
@@ -15,7 +15,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
 
   Future<void> getRecipeList() async {
     emit(const RecipeListLoading());
-    immortalRecipeList = await RecipeProvider.getRecipeList();
+    immortalRecipeList = await RecipeRepository.getRecipeList();
     emit(RecipeListAction(recipeList: immortalRecipeList));
   }
 

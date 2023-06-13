@@ -5,8 +5,8 @@ import '../firebase/auth.dart';
 import '../model/recipe.dart';
 import '../model/user_recipe.dart';
 
-class RecipeProvider {
-  RecipeProvider._();
+class RecipeRepository {
+  RecipeRepository._();
 
   static final _db = FirebaseFirestore.instance;
   static final _userData = AppAuth.userData;
