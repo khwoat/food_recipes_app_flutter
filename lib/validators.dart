@@ -42,11 +42,11 @@ class TextFieldValidator {
 
   static String? confirmPasswordValidator(
     String? value,
-    TextEditingController _passCtrl,
+    TextEditingController passCtrl,
   ) {
     if (value == null || value.trim().isEmpty) {
       return ValidatorString.FIELD_EMPTY;
-    } else if (value != _passCtrl.text) {
+    } else if (value != passCtrl.text) {
       return ValidatorString.PASSWORD_NOT_MATCH;
     }
     return null;

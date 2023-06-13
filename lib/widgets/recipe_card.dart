@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
 import 'package:food_recipes_flutter/model/recipe.dart';
 
 import '../constants/colors.dart';
