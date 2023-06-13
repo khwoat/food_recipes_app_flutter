@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
-import 'package:food_recipes_flutter/model/user.dart';
+import 'package:food_recipes_flutter/model/user_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:food_recipes_flutter/model/user_recipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppAuth {
@@ -37,9 +38,7 @@ class AppAuth {
         email: email,
         password: password,
       );
-      final uid = cred.user?.uid;
-      final snap = await _db.collection(DbString.USERS_COL).doc(uid).get();
-      userData = UserData.fromSnapshot(snap);
+      userData = UserData.fromCredential(cred);
 
       // Store User session to local storage
       await sharedPref.setString(
@@ -79,15 +78,13 @@ class AppAuth {
         email: email,
         password: password,
       );
-      final user = UserData(
+      final userRecipe = UserRecipe(
         id: cred.user?.uid ?? "",
-        displayName: displayName,
-        email: email,
         favIds: [],
         recipeIds: [],
       );
       final newUserDoc = _db.collection(DbString.USERS_COL).doc(cred.user?.uid);
-      await newUserDoc.set(user.toJson());
+      await newUserDoc.set(userRecipe.toJson());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.EMAIL_INUSE_CODE) {
         throw (AuthString.EMAIL_INUSE_TXT);
