@@ -49,10 +49,7 @@ class _UserRecipesPageState extends State<UserRecipesPage> {
                     itemCount: state.favList.length,
                     itemBuilder: (context, index) {
                       final Recipe fav = state.favList[index];
-                      return RecipeCard(
-                        recipe: fav,
-                        onTapFav: () {},
-                      );
+                      return RecipeCard(recipe: fav);
                     },
                   );
                 },

@@ -14,11 +14,4 @@ class FavoriteListCubit extends Cubit<FavoriteListState> {
     final favList = await FavoriteProvider.getFavoriteList();
     emit(FavoriteListAction(favList: favList));
   }
-
-  Future<void> changeFav(Recipe recipe) async {
-    emit(FavoriteListLoading());
-    final newIsFav = !recipe.isFav;
-    final favList = await FavoriteProvider.changeFav(recipe, newIsFav);
-    emit(FavoriteListAction(favList: favList));
-  }
 }

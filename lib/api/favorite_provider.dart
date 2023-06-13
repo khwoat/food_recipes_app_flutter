@@ -32,7 +32,7 @@ class FavoriteProvider {
     return favList;
   }
 
-  static Future<List<Recipe>> changeFav(Recipe recipe, bool isFav) async {
+  static Future<void> changeFav(Recipe recipe, bool isFav) async {
     final snap =
         await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
     final userRecipe = UserRecipe.fromSnapshot(snap);
@@ -46,7 +46,5 @@ class FavoriteProvider {
     await _db.collection(DbString.USERS_COL).doc(_userData.id).update({
       "favIds": favList,
     });
-
-    return await getFavoriteList();
   }
 }

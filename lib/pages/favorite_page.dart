@@ -55,6 +55,7 @@ class _FavoritePageState extends State<FavoritePage> {
             // Fav list grid
             Expanded(
               child: BlocBuilder<FavoriteListCubit, FavoriteListState>(
+                bloc: _favoriteListCubit,
                 builder: (context, state) {
                   return GridView.builder(
                     gridDelegate:
@@ -65,10 +66,7 @@ class _FavoritePageState extends State<FavoritePage> {
                     itemCount: state.favList.length,
                     itemBuilder: (context, index) {
                       final Recipe fav = state.favList[index];
-                      return RecipeCard(
-                        recipe: fav,
-                        onTapFav: () => _favoriteListCubit.changeFav(fav),
-                      );
+                      return RecipeCard(recipe: fav);
                     },
                   );
                 },

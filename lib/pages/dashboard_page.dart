@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
-import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 import '../cubit/dropdown/dropdown_cubit.dart';
 import '../cubit/recipe_list/recipe_list_cubit.dart';
@@ -20,14 +19,12 @@ class _DashboardPageState extends State<DashboardPage> {
   final DropdownCubit _cateDropdownCubit = DropdownCubit();
   final DropdownCubit _sortDropdownCubit = DropdownCubit();
   late final RecipeListCubit _recipesCubit;
-  late final FavoriteListCubit _favoriteListCubit;
 
   bool isShowSearchBox = false;
 
   @override
   void didChangeDependencies() {
     _recipesCubit = BlocProvider.of<RecipeListCubit>(context);
-    _favoriteListCubit = BlocProvider.of<FavoriteListCubit>(context);
     super.didChangeDependencies();
   }
 
@@ -102,13 +99,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     itemCount: state.recipeList.length,
                     itemBuilder: (context, index) {
                       final Recipe recipe = state.recipeList[index];
-                      return RecipeCard(
-                        recipe: recipe,
-                        onTapFav: () async {
-                          await _favoriteListCubit.changeFav(recipe);
-                          await _recipesCubit.getRecipeList();
-                        },
-                      );
+                      return RecipeCard(recipe: recipe);
                     },
                   );
                 },
