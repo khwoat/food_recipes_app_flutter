@@ -35,6 +35,10 @@ class UIString {
   static const String LOGOUT_DRAWER = "Logout";
 }
 
+class SharedPrefString {
+  static const String USER_SESSION = "user-session-data";
+}
+
 class AuthString {
   // For Login
   static const String USER_NOT_FOUND_CODE = "user-not-found";

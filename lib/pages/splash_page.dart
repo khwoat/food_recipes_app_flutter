@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
+import 'package:food_recipes_flutter/firebase/auth.dart';
 import 'package:food_recipes_flutter/route.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,7 +16,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 3000)).then(
-      (value) => Navigator.popAndPushNamed(context, AppRoute.LOGIN_PAGE),
+      (value) async {
+        await AppAuth.getUserSession().then((value) {
+          Navigator.of(context).pushReplacementNamed(
+            value ? AppRoute.HOME_PAGE : AppRoute.LOGIN_PAGE,
+          );
+        });
+      },
     );
 
     return Scaffold(

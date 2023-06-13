@@ -54,6 +54,7 @@ class UserData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> map = {};
+    map["id"] = _id;
     map["displayName"] = _displayName;
     map["email"] = _email;
     map["favIds"] = _favIds;

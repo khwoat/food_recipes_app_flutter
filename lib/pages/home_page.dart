@@ -104,9 +104,15 @@ class _HomePageState extends State<HomePage> {
             _getDrawerMenuButton(
               context,
               label: UIString.LOGOUT_DRAWER,
-              onTap: () => Navigator.of(context).pushReplacementNamed(
-                AppRoute.LOGIN_PAGE,
-              ),
+              onTap: () async {
+                await AppAuth.logout().then(
+                  (value) {
+                    Navigator.of(context).pushReplacementNamed(
+                      AppRoute.LOGIN_PAGE,
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),
