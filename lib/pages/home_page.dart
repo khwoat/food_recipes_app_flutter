@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/button_style.dart';
+import 'package:food_recipes_flutter/cubit/page_view_btn/page_view_btn_cubit.dart';
 import 'package:food_recipes_flutter/firebase/auth.dart';
 
 import '../constants/colors.dart';
@@ -17,9 +19,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Widget> _pageList = AppRoute.allPageView();
 
-  final PageController _pageController = PageController();
+  final _pageViewBtnCubit = PageViewBtnCubit();
 
-  int _pageIndex = 0;
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +54,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: PageView(
               onPageChanged: (value) {
-                setState(() {
-                  _pageIndex = value;
-                });
+                _pageViewBtnCubit.changePageIndex(value);
               },
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
@@ -159,15 +159,40 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _getIconButton(context, icon: Icons.home, index: 0),
-          _getIconButton(context, icon: Icons.notifications, index: 1),
-          _getIconButton(context, icon: Icons.favorite, index: 2),
-          _getIconButton(context, icon: Icons.restaurant, index: 3),
-        ],
+      child: BlocBuilder<PageViewBtnCubit, PageViewBtnState>(
+        bloc: _pageViewBtnCubit,
+        builder: (context, state) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _getIconButton(
+                context,
+                icon: Icons.home,
+                index: 0,
+                state: state,
+              ),
+              _getIconButton(
+                context,
+                icon: Icons.notifications,
+                index: 1,
+                state: state,
+              ),
+              _getIconButton(
+                context,
+                icon: Icons.favorite,
+                index: 2,
+                state: state,
+              ),
+              _getIconButton(
+                context,
+                icon: Icons.restaurant,
+                index: 3,
+                state: state,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -177,8 +202,9 @@ class _HomePageState extends State<HomePage> {
     BuildContext context, {
     required IconData icon,
     required int index,
+    required PageViewBtnState state,
   }) {
-    bool isSelected = _pageIndex == index;
+    bool isSelected = state.pageIndex == index;
     return InkWell(
       onTap: () {
         _pageController.animateToPage(
