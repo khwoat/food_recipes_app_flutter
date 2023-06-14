@@ -6,8 +6,16 @@ import 'package:meta/meta.dart';
 
 part 'dropdown_state.dart';
 
-class DropdownCubit extends Cubit<DropdownState> {
-  DropdownCubit() : super(DropdownInitial());
+class DropdownType {}
+
+class CateDropdownType extends DropdownType {}
+
+class SortDropdownType extends DropdownType {}
+
+class DropdownCubit<T extends DropdownType> extends Cubit<DropdownState> {
+  DropdownCubit({required String doc}) : super(DropdownInitial()) {
+    getValueList(doc);
+  }
 
   void init(List<String> valueList) {
     emit(DropdownAction(

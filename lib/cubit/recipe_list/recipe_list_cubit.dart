@@ -9,7 +9,9 @@ part 'recipe_list_state.dart';
 enum SortingBy { mostFav, name }
 
 class RecipeListCubit extends Cubit<RecipeListState> {
-  RecipeListCubit() : super(RecipeListInitial());
+  RecipeListCubit() : super(RecipeListInitial()) {
+    getRecipeList();
+  }
 
   List<Recipe> immortalRecipeList = [];
 

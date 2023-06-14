@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
-import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 import '../cubit/dropdown/dropdown_cubit.dart';
@@ -16,26 +15,20 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  final DropdownCubit _cateDropdownCubit = DropdownCubit();
-  final DropdownCubit _sortDropdownCubit = DropdownCubit();
   late final RecipeListCubit _recipesCubit;
+  late final DropdownCubit _cateDropdownCubit;
+  late final DropdownCubit _sortDropdownCubit;
 
   bool isShowSearchBox = false;
 
   @override
   void didChangeDependencies() {
     _recipesCubit = BlocProvider.of<RecipeListCubit>(context);
+    _cateDropdownCubit =
+        BlocProvider.of<DropdownCubit<CateDropdownType>>(context);
+    _sortDropdownCubit =
+        BlocProvider.of<DropdownCubit<SortDropdownType>>(context);
     super.didChangeDependencies();
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _cateDropdownCubit.getValueList(DbString.CATEGORIES_DOC);
-      _sortDropdownCubit.getValueList(DbString.SORTING_DOC);
-      _recipesCubit.getRecipeList();
-    });
-    super.initState();
   }
 
   @override
@@ -122,6 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
       value: value,
       onChanged: onChanged,
       underline: Container(),
+      alignment: AlignmentDirectional.centerEnd,
       items: valueList
           .map((e) => _getDropdownItem(context, valueList.indexOf(e), e))
           .toList(),

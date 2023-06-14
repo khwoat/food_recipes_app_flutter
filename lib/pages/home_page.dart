@@ -17,8 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Widget> _pageList = AppRoute.allPageView();
-
   final _pageViewBtnCubit = PageViewBtnCubit();
 
   final PageController _pageController = PageController();
@@ -58,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               },
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: _pageList,
+              children: AppRoute.allPageView(),
             ),
           ),
           _getBottomNavigationBar(context),
