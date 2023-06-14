@@ -1,16 +1,10 @@
-# food_recipes_flutter
+# Food Recipes App (Flutter)
+The Food Recipes App was develop for traning the Bloc Cubit state management and application of Firebase service including Firebase Auth and Cloud Firestore.
 
-A new Flutter project.
+## About the Application
+This application has 2 main features including,
+  1. Create, Update, and Delete user's food recipes.
+  2. View, Comment, and Save (Favorite) other's food recipes.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Project Status
+This project is under development.
