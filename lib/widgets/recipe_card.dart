@@ -109,9 +109,10 @@ class _RecipeCardState extends State<RecipeCard> {
                     duration: const Duration(milliseconds: 200),
                     transitionBuilder: (child, animation) {
                       return ScaleTransition(
-                        scale: Tween<double>(begin: 1, end: 1.5)
-                            .animate(animation)
-                            .drive(Tween<double>(begin: 1.5, end: 1)),
+                        scale: animation.drive(Tween<double>(
+                          begin: 1.5,
+                          end: 1,
+                        )),
                         child: FadeTransition(opacity: animation, child: child),
                       );
                     },
@@ -120,13 +121,13 @@ class _RecipeCardState extends State<RecipeCard> {
                             Icons.favorite,
                             key: ValueKey(1),
                             color: AppColors.ORANGE_FE7455,
-                            size: 45,
+                            size: 35,
                           )
                         : const Icon(
                             Icons.favorite_outline,
                             key: ValueKey(2),
                             color: AppColors.WHITE,
-                            size: 45,
+                            size: 35,
                           ),
                   ),
                 ),
