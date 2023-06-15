@@ -21,6 +21,8 @@ class _HomePageState extends State<HomePage> {
 
   final PageController _pageController = PageController();
 
+  final AppAuth _appAuth = AppAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               context,
               label: UIString.LOGOUT_DRAWER,
               onTap: () async {
-                await AppAuth.logout().then(
+                await _appAuth.logout().then(
                   (value) {
                     Navigator.of(context).pushReplacementNamed(
                       AppRoute.LOGIN_PAGE,

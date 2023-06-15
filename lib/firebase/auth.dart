@@ -4,26 +4,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:food_recipes_flutter/model/user_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_recipes_flutter/model/user_recipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppAuth {
   AppAuth._();
 
-  static final _db = FirebaseFirestore.instance;
-  static final _auth = FirebaseAuth.instance;
+  static AppAuth get instance => AppAuth._();
+
+  final _db = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
 
   static UserData userData = UserData.defaultValue();
 
   /// Get session from Shared Preference
   /// return true if found session
-  static Future<bool> getUserSession() async {
+  Future<bool> getUserSession() async {
     // Find User session in local storage
     final sharedPref = await SharedPreferences.getInstance();
     final userSession = sharedPref.getString(SharedPrefString.USER_SESSION);
 
     if (userSession != null && userSession != "") {
-      userData = UserData.fromJson(jsonDecode(userSession));
+      userData = UserData.fromCredJson(jsonDecode(userSession));
       return true;
     } else {
       return false;
@@ -31,19 +32,21 @@ class AppAuth {
   }
 
   /// Login function
-  static Future<void> login(String email, String password) async {
+  Future<void> login(String email, String password) async {
     try {
       final sharedPref = await SharedPreferences.getInstance();
       final cred = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      userData = UserData.fromCredential(cred);
+      final snap =
+          await _db.collection(DbString.RECIPES_COL).doc(cred.user?.uid).get();
+      userData = UserData.fromCredAndSnap(cred, snap);
 
       // Store User session to local storage
       await sharedPref.setString(
         SharedPrefString.USER_SESSION,
-        jsonEncode(userData.toJson()),
+        jsonEncode(userData.toCredJson()),
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.USER_NOT_FOUND_CODE) {
@@ -55,7 +58,7 @@ class AppAuth {
   }
 
   /// Logout function
-  static Future<void> logout() async {
+  Future<void> logout() async {
     try {
       final sharedPref = await SharedPreferences.getInstance();
       await sharedPref.setString(SharedPrefString.USER_SESSION, "");
@@ -68,7 +71,7 @@ class AppAuth {
   /*
    * Register function
    */
-  static Future<void> register(
+  Future<void> register(
     String displayName,
     String email,
     String password,
@@ -78,13 +81,15 @@ class AppAuth {
         email: email,
         password: password,
       );
-      final userRecipe = UserRecipe(
+      final userData = UserData(
         id: cred.user?.uid ?? "",
+        displayName: displayName,
+        email: email,
         favIds: [],
         recipeIds: [],
       );
       final newUserDoc = _db.collection(DbString.USERS_COL).doc(cred.user?.uid);
-      await newUserDoc.set(userRecipe.toJson());
+      await newUserDoc.set(userData.toJsonWithoutId());
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.EMAIL_INUSE_CODE) {
         throw (AuthString.EMAIL_INUSE_TXT);

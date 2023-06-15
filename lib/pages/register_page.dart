@@ -11,6 +11,8 @@ import '../constants/text_style.dart';
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
+  final AppAuth _appAuth = AppAuth.instance;
+
   final _formKey = GlobalKey<FormState>();
 
   final _usernameCtrl = TextEditingController();
@@ -96,11 +98,13 @@ class RegisterPage extends StatelessWidget {
                         FocusManager.instance.primaryFocus?.unfocus();
                         if (_formKey.currentState!.validate()) {
                           try {
-                            await AppAuth.register(
+                            await _appAuth
+                                .register(
                               _usernameCtrl.text,
                               _emailCtrl.text,
                               _passwordCtrl.text,
-                            ).then((value) {
+                            )
+                                .then((value) {
                               Navigator.of(context).pop();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 AppSnackBar.build(

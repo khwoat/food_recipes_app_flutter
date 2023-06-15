@@ -13,11 +13,13 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final AppAuth _appAuth = AppAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 3000)).then(
       (value) async {
-        await AppAuth.getUserSession().then((value) {
+        await _appAuth.getUserSession().then((value) {
           Navigator.of(context).pushReplacementNamed(
             value ? AppRoute.HOME_PAGE : AppRoute.LOGIN_PAGE,
           );

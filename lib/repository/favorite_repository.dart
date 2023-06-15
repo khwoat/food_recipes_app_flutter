@@ -4,10 +4,11 @@ import 'package:food_recipes_flutter/model/user_recipe.dart';
 import '../constants/string.dart';
 import '../firebase/auth.dart';
 import '../model/recipe.dart';
+import '../model/user_data.dart';
 
 class FavoriteRepository {
   final _db = FirebaseFirestore.instance;
-  final _userData = AppAuth.userData;
+  final UserData _userData = AppAuth.userData;
 
   // Get User Favorite recipes
   Future<List<Recipe>> getFavoriteList() async {

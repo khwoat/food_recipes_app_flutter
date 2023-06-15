@@ -18,6 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AppAuth _appAuth = AppAuth.instance;
+
   final _emailTxtCtrl = TextEditingController();
   final _passTxtCtrl = TextEditingController();
 
@@ -143,10 +145,12 @@ class _LoginPageState extends State<LoginPage> {
               FocusManager.instance.primaryFocus?.unfocus();
               if (_formKey.currentState!.validate()) {
                 try {
-                  await AppAuth.login(
+                  await _appAuth
+                      .login(
                     _emailTxtCtrl.text,
                     _passTxtCtrl.text,
-                  ).then((value) {
+                  )
+                      .then((value) {
                     Navigator.of(context).popAndPushNamed(
                       AppRoute.HOME_PAGE,
                     );
