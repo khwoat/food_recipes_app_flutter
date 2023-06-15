@@ -28,6 +28,12 @@ class _DashboardPageState extends State<DashboardPage> {
         BlocProvider.of<DropdownCubit<CateDropdownType>>(context);
     _sortDropdownCubit =
         BlocProvider.of<DropdownCubit<SortDropdownType>>(context);
+
+    _recipesCubit.filterRecipes(
+      cateId: _cateDropdownCubit.state.selectedValue,
+      sortId: _sortDropdownCubit.state.selectedValue,
+      sortingList: _sortDropdownCubit.state.valueList,
+    );
     super.didChangeDependencies();
   }
 

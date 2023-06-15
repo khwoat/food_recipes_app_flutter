@@ -6,13 +6,11 @@ import '../model/recipe.dart';
 import '../model/user_recipe.dart';
 
 class RecipeRepository {
-  RecipeRepository._();
-
-  static final _db = FirebaseFirestore.instance;
-  static final _userData = AppAuth.userData;
+  final _db = FirebaseFirestore.instance;
+  final _userData = AppAuth.userData;
 
   // Get recipe list to show in dashboard page
-  static Future<List<Recipe>> getRecipeList() async {
+  Future<List<Recipe>> getRecipeList() async {
     final userSnap =
         await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
     final userRecipe = UserRecipe.fromSnapshot(userSnap);
@@ -29,11 +27,5 @@ class RecipeRepository {
       ));
     }
     return recipeList;
-  }
-
-  // Get dropdown (category, sorting) item from database
-  static Future<List<String>> getDropdownItemList(String doc) async {
-    final snap = await _db.collection(DbString.DROPDOWN_COL).doc(doc).get();
-    return (snap.data()?["list"] as List).map<String>((e) => e).toList();
   }
 }

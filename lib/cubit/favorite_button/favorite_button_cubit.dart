@@ -7,13 +7,20 @@ import '../../model/recipe.dart';
 part 'favorite_button_state.dart';
 
 class FavoriteButtonCubit extends Cubit<FavoriteButtonState> {
-  FavoriteButtonCubit({required bool isFav})
-      : super(FavoriteButtonInitial(isFav: isFav));
+  FavoriteButtonCubit({required FavoriteRepository favoriteRepository})
+      : _favoriteRepository = favoriteRepository,
+        super(const FavoriteButtonInitial());
+
+  final FavoriteRepository _favoriteRepository;
+
+  void setFav(bool isFav) {
+    emit(FavoriteButtonAction(isFav: isFav));
+  }
 
   Future<void> changeFav(Recipe recipe, bool isFav) async {
     emit(const FavoriteButtonLoading());
     final newIsFav = !isFav;
-    await FavoriteRepository.changeFav(recipe, newIsFav);
+    await _favoriteRepository.changeFav(recipe, newIsFav);
     emit(FavoriteButtonAction(isFav: newIsFav));
   }
 }

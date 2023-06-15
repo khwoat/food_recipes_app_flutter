@@ -1,20 +1,20 @@
 part of 'favorite_button_cubit.dart';
 
 abstract class FavoriteButtonState extends Equatable {
-  const FavoriteButtonState({required this.isFav});
+  const FavoriteButtonState({this.isFav});
 
-  final bool isFav;
+  final bool? isFav;
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [isFav];
 }
 
 class FavoriteButtonInitial extends FavoriteButtonState {
-  const FavoriteButtonInitial({required super.isFav});
+  const FavoriteButtonInitial();
 }
 
 class FavoriteButtonLoading extends FavoriteButtonState {
-  const FavoriteButtonLoading({super.isFav = false});
+  const FavoriteButtonLoading();
 }
 
 class FavoriteButtonAction extends FavoriteButtonState {

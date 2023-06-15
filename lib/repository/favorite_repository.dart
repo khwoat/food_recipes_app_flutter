@@ -6,13 +6,11 @@ import '../firebase/auth.dart';
 import '../model/recipe.dart';
 
 class FavoriteRepository {
-  FavoriteRepository._();
-
-  static final _db = FirebaseFirestore.instance;
-  static final _userData = AppAuth.userData;
+  final _db = FirebaseFirestore.instance;
+  final _userData = AppAuth.userData;
 
   // Get User Favorite recipes
-  static Future<List<Recipe>> getFavoriteList() async {
+  Future<List<Recipe>> getFavoriteList() async {
     final List<Recipe> favList = [];
     final snap =
         await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
@@ -32,7 +30,7 @@ class FavoriteRepository {
     return favList;
   }
 
-  static Future<void> changeFav(Recipe recipe, bool isFav) async {
+  Future<void> changeFav(Recipe recipe, bool isFav) async {
     final snap =
         await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
     final userRecipe = UserRecipe.fromSnapshot(snap);

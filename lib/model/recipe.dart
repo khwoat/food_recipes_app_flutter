@@ -1,51 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class Recipe {
-  late String _id;
-  late String _recipeName;
-  late String _displayName;
-  late int _cateId;
-  late bool _isFav;
-  late int _favNum;
-  late List<RecipeDetail> _detailList;
-  late List<String?> _imageList;
+class Recipe extends Equatable {
+  late final String id;
+  late final String recipeName;
+  late final String displayName;
+  late final int cateId;
+  late final bool isFav;
+  late final int favNum;
+  late final List<RecipeDetail> detailList;
+  late final List<String> imageList;
 
-  Recipe({
-    required String id,
-    required String recipeName,
-    required String displayName,
-    required int cateId,
-    required bool isFav,
-    required int favNum,
-    required List<RecipeDetail> detailList,
-    required List<String> imageList,
-  })  : _id = id,
-        _recipeName = recipeName,
-        _displayName = displayName,
-        _cateId = cateId,
-        _isFav = isFav,
-        _favNum = favNum,
-        _detailList = detailList,
-        _imageList = imageList;
-
-  String get id => _id;
-  String get recipeName => _recipeName;
-  String get displayName => _displayName;
-  int get cateId => _cateId;
-  bool get isFav => _isFav;
-  int get favNum => _favNum;
-  List<RecipeDetail> get detailList => _detailList;
-  List<String?> get imageList => _imageList;
+  @override
+  List<Object> get props => [id, recipeName];
 
   Recipe.fromJson(Map<String, dynamic> json) {
-    _id = json["id"];
-    _recipeName = json["recipeName"];
-    _displayName = json["displayName"];
-    _cateId = json["cateId"];
-    _isFav = json["isFav"];
-    _favNum = json["favNum"];
-    _detailList = json["detailList"];
-    _imageList = json["imageList"];
+    id = json["id"];
+    recipeName = json["recipeName"];
+    displayName = json["displayName"];
+    cateId = json["cateId"];
+    isFav = json["isFav"];
+    favNum = json["favNum"];
+    detailList = json["detailList"];
+    imageList = json["imageList"];
   }
 
   // Map data from QueryDocumentSnapshot
@@ -55,16 +32,15 @@ class Recipe {
     required bool isFav,
   }) {
     final data = recipeSnap.data();
-    _id = recipeSnap.id;
-    _recipeName = data["recipeName"];
-    _displayName = data["displayName"];
-    _cateId = data["cateId"];
-    _isFav = isFav;
-    _favNum = data["favNum"];
-    _imageList =
+    id = recipeSnap.id;
+    recipeName = data["recipeName"];
+    displayName = data["displayName"];
+    cateId = data["cateId"];
+    isFav = isFav;
+    favNum = data["favNum"];
+    imageList =
         (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
-
-    _detailList =
+    detailList =
         detailSnapList.map((e) => RecipeDetail.fromSnapshot(e)).toList();
   }
 
@@ -75,30 +51,29 @@ class Recipe {
     required bool isFav,
   }) {
     final data = recipeSnap.data();
-    _id = recipeSnap.id;
+    id = recipeSnap.id;
     if (data != null) {
-      _recipeName = data["recipeName"];
-      _displayName = data["displayName"];
-      _cateId = data["cateId"];
-      _isFav = isFav;
-      _favNum = data["favNum"];
-      _imageList =
+      recipeName = data["recipeName"];
+      displayName = data["displayName"];
+      cateId = data["cateId"];
+      isFav = isFav;
+      favNum = data["favNum"];
+      imageList =
           (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
-
-      _detailList =
+      detailList =
           detailSnapList.map((e) => RecipeDetail.fromSnapshot(e)).toList();
     }
   }
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {};
-    map["id"] = _id;
-    map["recipeName"] = _recipeName;
-    map["displayName"] = _displayName;
-    map["cateId"] = _cateId;
-    map["favNum"] = _favNum;
-    map["detailList"] = _detailList;
-    map["imageList"] = _imageList;
+    map["id"] = id;
+    map["recipeName"] = recipeName;
+    map["displayName"] = displayName;
+    map["cateId"] = cateId;
+    map["favNum"] = favNum;
+    map["detailList"] = detailList;
+    map["imageList"] = imageList;
     return map;
   }
 }

@@ -9,15 +9,19 @@ part 'recipe_list_state.dart';
 enum SortingBy { mostFav, name }
 
 class RecipeListCubit extends Cubit<RecipeListState> {
-  RecipeListCubit() : super(RecipeListInitial()) {
+  RecipeListCubit({required RecipeRepository recipeRepository})
+      : _recipeRepository = recipeRepository,
+        super(RecipeListInitial()) {
     getRecipeList();
   }
+
+  final RecipeRepository _recipeRepository;
 
   List<Recipe> immortalRecipeList = [];
 
   Future<void> getRecipeList() async {
     emit(const RecipeListLoading());
-    immortalRecipeList = await RecipeRepository.getRecipeList();
+    immortalRecipeList = await _recipeRepository.getRecipeList();
     emit(RecipeListAction(recipeList: immortalRecipeList));
   }
 

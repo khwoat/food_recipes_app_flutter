@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:food_recipes_flutter/repository/dropdown_repository.dart';
 import 'package:food_recipes_flutter/repository/recipe_repository.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
 import 'package:meta/meta.dart';
@@ -13,9 +14,14 @@ class CateDropdownType extends DropdownType {}
 class SortDropdownType extends DropdownType {}
 
 class DropdownCubit<T extends DropdownType> extends Cubit<DropdownState> {
-  DropdownCubit({required String doc}) : super(DropdownInitial()) {
+  DropdownCubit(
+      {required DropdownRepository dropdownRepository, required String doc})
+      : _dropdownRepository = dropdownRepository,
+        super(DropdownInitial()) {
     getValueList(doc);
   }
+
+  final DropdownRepository _dropdownRepository;
 
   void init(List<String> valueList) {
     emit(DropdownAction(
@@ -29,11 +35,11 @@ class DropdownCubit<T extends DropdownType> extends Cubit<DropdownState> {
 
     List<String> valueList = [];
     if (doc == DbString.CATEGORIES_DOC) {
-      valueList = await RecipeRepository.getDropdownItemList(
+      valueList = await _dropdownRepository.getDropdownItemList(
         DbString.CATEGORIES_DOC,
       );
     } else if (doc == DbString.SORTING_DOC) {
-      valueList = await RecipeRepository.getDropdownItemList(
+      valueList = await _dropdownRepository.getDropdownItemList(
         DbString.SORTING_DOC,
       );
     }
