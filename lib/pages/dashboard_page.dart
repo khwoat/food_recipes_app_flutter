@@ -152,16 +152,21 @@ class _DashboardPageState extends State<DashboardPage> {
         BlocBuilder<DropdownCubit, DropdownState>(
           bloc: _cateDropdownCubit,
           builder: (context, state) {
-            return _getDropdownButton(context,
-                value: state.selectedValue,
-                valueList: state.valueList, onChanged: (value) {
-              _cateDropdownCubit.selectNewValue(value ?? 0);
-              _recipesCubit.filterRecipes(
-                cateId: value ?? 0,
-                sortId: _sortDropdownCubit.state.selectedValue,
-                sortingList: _sortDropdownCubit.state.valueList,
-              );
-            });
+            return _getDropdownButton(
+              context,
+              value: state.selectedValue,
+              valueList: state.valueList,
+              onChanged: (value) async {
+                _cateDropdownCubit.selectNewValue(value ?? 0);
+
+                await _recipesCubit.getRecipeList();
+                _recipesCubit.filterRecipes(
+                  cateId: value ?? 0,
+                  sortId: _sortDropdownCubit.state.selectedValue,
+                  sortingList: _sortDropdownCubit.state.valueList,
+                );
+              },
+            );
           },
         ),
         const SizedBox(width: 10),
@@ -174,8 +179,10 @@ class _DashboardPageState extends State<DashboardPage> {
               context,
               value: state.selectedValue,
               valueList: state.valueList,
-              onChanged: (value) {
+              onChanged: (value) async {
                 _sortDropdownCubit.selectNewValue(value ?? 0);
+
+                await _recipesCubit.getRecipeList();
                 _recipesCubit.filterRecipes(
                   cateId: _cateDropdownCubit.state.selectedValue,
                   sortId: value ?? 0,
