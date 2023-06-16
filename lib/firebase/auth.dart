@@ -24,7 +24,7 @@ class AppAuth {
     final userSession = sharedPref.getString(SharedPrefString.USER_SESSION);
 
     if (userSession != null && userSession != "") {
-      userData = UserData.fromCredJson(jsonDecode(userSession));
+      userData = UserData.fromJson(jsonDecode(userSession));
       return true;
     } else {
       return false;
@@ -39,14 +39,12 @@ class AppAuth {
         email: email,
         password: password,
       );
-      final snap =
-          await _db.collection(DbString.RECIPES_COL).doc(cred.user?.uid).get();
-      userData = UserData.fromCredAndSnap(cred, snap);
+      userData = UserData.fromCred(cred);
 
       // Store User session to local storage
       await sharedPref.setString(
         SharedPrefString.USER_SESSION,
-        jsonEncode(userData.toCredJson()),
+        jsonEncode(userData.toJson()),
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.USER_NOT_FOUND_CODE) {
@@ -81,15 +79,19 @@ class AppAuth {
         email: email,
         password: password,
       );
+      await cred.user?.updateDisplayName(displayName);
       final userData = UserData(
         id: cred.user?.uid ?? "",
         displayName: displayName,
         email: email,
-        favIds: [],
-        recipeIds: [],
       );
       final newUserDoc = _db.collection(DbString.USERS_COL).doc(cred.user?.uid);
-      await newUserDoc.set(userData.toJsonWithoutId());
+      await newUserDoc.set({
+        ...userData.toJson(),
+        "id": null,
+        "favIds": [],
+        "recipeIds": [],
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthString.EMAIL_INUSE_CODE) {
         throw (AuthString.EMAIL_INUSE_TXT);

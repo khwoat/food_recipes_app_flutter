@@ -22,7 +22,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   Future<void> getRecipeList() async {
     emit(const RecipeListLoading());
     immortalRecipeList = await _recipeRepository.getRecipeList();
-    emit(RecipeListAction(recipeList: immortalRecipeList));
+    emit(RecipeListSuccess(recipeList: immortalRecipeList));
   }
 
   // Filter recipes (Category and Sorting)
@@ -40,7 +40,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
       newList = immortalRecipeList;
     }
 
-    emit(RecipeListLoading(recipeList: newList));
+    emit(const RecipeListLoading());
 
     // Sorting
     if (sortId != 0) {
@@ -50,6 +50,6 @@ class RecipeListCubit extends Cubit<RecipeListState> {
         newList.sort((a, b) => a.recipeName.compareTo(b.recipeName));
       }
     }
-    emit(RecipeListAction(recipeList: newList));
+    emit(RecipeListSuccess(recipeList: newList));
   }
 }

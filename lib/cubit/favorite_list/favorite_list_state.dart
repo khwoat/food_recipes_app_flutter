@@ -21,3 +21,7 @@ class FavoriteListLoading extends FavoriteListState {}
 class FavoriteListAction extends FavoriteListState {
   const FavoriteListAction({super.favList});
 }
+
+class FavoriteListSuccess extends FavoriteListState {
+  const FavoriteListSuccess({super.favList});
+}

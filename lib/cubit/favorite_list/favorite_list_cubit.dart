@@ -18,6 +18,6 @@ class FavoriteListCubit extends Cubit<FavoriteListState> {
   Future<void> getFavoriteList() async {
     emit(FavoriteListLoading());
     final favList = await _favoriteRepository.getFavoriteList();
-    emit(FavoriteListAction(favList: favList));
+    emit(FavoriteListSuccess(favList: favList));
   }
 }

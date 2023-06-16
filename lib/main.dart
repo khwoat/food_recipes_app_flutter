@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_recipes_flutter/bloc_provider.dart';
 import 'package:food_recipes_flutter/constants/colors.dart';
 import 'package:food_recipes_flutter/route.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'bloc_provider.dart';
 import 'firebase/firebase_options.dart';
 
 void main() async {

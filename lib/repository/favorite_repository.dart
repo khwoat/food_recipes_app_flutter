@@ -4,26 +4,24 @@ import 'package:food_recipes_flutter/model/user_recipe.dart';
 import '../constants/string.dart';
 import '../firebase/auth.dart';
 import '../model/recipe.dart';
-import '../model/user_data.dart';
 
 class FavoriteRepository {
   final _db = FirebaseFirestore.instance;
-  final UserData _userData = AppAuth.userData;
 
   // Get User Favorite recipes
   Future<List<Recipe>> getFavoriteList() async {
     final List<Recipe> favList = [];
-    final snap =
-        await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
+    final uid = AppAuth.userData.id;
+    final snap = await _db.collection(DbString.USERS_COL).doc(uid).get();
     final userRecipe = UserRecipe.fromSnapshot(snap);
 
     for (String id in userRecipe.favIds) {
       final snap = await _db.collection(DbString.RECIPES_COL).doc(id).get();
-      final detailSnapList =
+      final detailList =
           await snap.reference.collection(DbString.DETAIL_RECIPE_COL).get();
       favList.add(Recipe.fromSnapshot(
         recipeSnap: snap,
-        detailSnapList: detailSnapList.docs,
+        detailSnapList: detailList.docs,
         isFav: userRecipe.favIds.contains(snap.id),
       ));
     }
@@ -32,8 +30,8 @@ class FavoriteRepository {
   }
 
   Future<void> changeFav(Recipe recipe, bool isFav) async {
-    final snap =
-        await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
+    final uid = AppAuth.userData.id;
+    final snap = await _db.collection(DbString.USERS_COL).doc(uid).get();
     final userRecipe = UserRecipe.fromSnapshot(snap);
 
     final favList = userRecipe.favIds;
@@ -42,7 +40,7 @@ class FavoriteRepository {
     } else if (!isFav) {
       favList.remove(recipe.id);
     }
-    await _db.collection(DbString.USERS_COL).doc(_userData.id).update({
+    await _db.collection(DbString.USERS_COL).doc(uid).update({
       "favIds": favList,
     });
   }

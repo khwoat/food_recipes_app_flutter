@@ -3,17 +3,15 @@ import 'package:food_recipes_flutter/constants/string.dart';
 
 import '../firebase/auth.dart';
 import '../model/recipe.dart';
-import '../model/user_data.dart';
 import '../model/user_recipe.dart';
 
 class RecipeRepository {
   final _db = FirebaseFirestore.instance;
-  final UserData _userData = AppAuth.userData;
 
   // Get recipe list to show in dashboard page
   Future<List<Recipe>> getRecipeList() async {
-    final userSnap =
-        await _db.collection(DbString.USERS_COL).doc(_userData.id).get();
+    final uid = AppAuth.userData.id;
+    final userSnap = await _db.collection(DbString.USERS_COL).doc(uid).get();
     final userRecipe = UserRecipe.fromSnapshot(userSnap);
 
     final snap = await _db.collection(DbString.RECIPES_COL).get();
