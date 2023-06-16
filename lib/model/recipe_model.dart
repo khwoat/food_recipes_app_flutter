@@ -12,7 +12,7 @@ class Recipe extends Equatable {
   late final List<String> imageList;
 
   @override
-  List<Object> get props => [id, recipeName];
+  List<Object> get props => [id, recipeName, isFav];
 
   Recipe.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -29,14 +29,13 @@ class Recipe extends Equatable {
   Recipe.fromQuerySnapshot({
     required QueryDocumentSnapshot<Map<String, dynamic>> recipeSnap,
     required List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
-    required bool isFav,
+    required this.isFav,
   }) {
     final data = recipeSnap.data();
     id = recipeSnap.id;
     recipeName = data["recipeName"];
     displayName = data["displayName"];
     cateId = data["cateId"];
-    isFav = isFav;
     favNum = data["favNum"];
     imageList =
         (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
@@ -48,7 +47,7 @@ class Recipe extends Equatable {
   Recipe.fromSnapshot({
     required DocumentSnapshot<Map<String, dynamic>> recipeSnap,
     required List<QueryDocumentSnapshot<Map<String, dynamic>>> detailSnapList,
-    required bool isFav,
+    required this.isFav,
   }) {
     final data = recipeSnap.data();
     id = recipeSnap.id;
@@ -56,7 +55,6 @@ class Recipe extends Equatable {
       recipeName = data["recipeName"];
       displayName = data["displayName"];
       cateId = data["cateId"];
-      isFav = isFav;
       favNum = data["favNum"];
       imageList =
           (data["imageList"] as List<dynamic>).map<String>((e) => e).toList();
@@ -71,6 +69,7 @@ class Recipe extends Equatable {
     map["recipeName"] = recipeName;
     map["displayName"] = displayName;
     map["cateId"] = cateId;
+    map["isFav"] = isFav;
     map["favNum"] = favNum;
     map["detailList"] = detailList;
     map["imageList"] = imageList;

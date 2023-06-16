@@ -6,7 +6,7 @@ import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 
-import '../model/recipe.dart';
+import '../model/recipe_model.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});

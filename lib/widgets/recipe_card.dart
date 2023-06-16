@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_recipes_flutter/cubit/favorite_button/favorite_button_cubit.dart';
 import 'package:food_recipes_flutter/cubit/favorite_list/favorite_list_cubit.dart';
-import 'package:food_recipes_flutter/model/recipe.dart';
-import 'package:food_recipes_flutter/repository/favorite_repository.dart';
+import 'package:food_recipes_flutter/cubit/recipe_data/recipe_data_cubit.dart';
+import 'package:food_recipes_flutter/model/recipe_model.dart';
+import 'package:food_recipes_flutter/repository/recipe_repository.dart';
 
 import '../constants/colors.dart';
 import '../constants/text_style.dart';
@@ -20,15 +20,18 @@ class RecipeCard extends StatefulWidget {
 }
 
 class _RecipeCardState extends State<RecipeCard> {
-  late final FavoriteButtonCubit _favoriteButtonCubit;
+  final _recipeRepository = RecipeRepository();
+
+  late final RecipeDataCubit _recipeDataCubit;
 
   late final FavoriteListCubit _favoriteListCubit;
 
   @override
   void didChangeDependencies() {
     _favoriteListCubit = BlocProvider.of<FavoriteListCubit>(context);
-    _favoriteButtonCubit = FavoriteButtonCubit(
-      favoriteRepository: FavoriteRepository(),
+    _recipeDataCubit = RecipeDataCubit(
+      recipeRepository: _recipeRepository,
+      id: widget._recipe.id,
     );
     super.didChangeDependencies();
   }
@@ -40,9 +43,6 @@ class _RecipeCardState extends State<RecipeCard> {
 
   @override
   Widget build(BuildContext context) {
-    _favoriteButtonCubit.setFav(
-      _favoriteListCubit.state.favList.contains(widget._recipe),
-    );
     return AppCard(
       padding: const EdgeInsets.all(0),
       child: Stack(
@@ -50,7 +50,6 @@ class _RecipeCardState extends State<RecipeCard> {
           Column(
             children: [
               // Recipe banner
-
               SizedBox(
                 height: 120,
                 child: (widget._recipe.imageList.first != "")
@@ -90,52 +89,55 @@ class _RecipeCardState extends State<RecipeCard> {
           ),
 
           // Favorite icon
-          BlocBuilder<FavoriteButtonCubit, FavoriteButtonState>(
-            bloc: _favoriteButtonCubit,
-            builder: (context, state) {
-              return Positioned(
-                top: 5,
-                right: 10,
-                child: GestureDetector(
-                  onTap: () async {
-                    await _favoriteButtonCubit.changeFav(
-                      widget._recipe,
-                      state.isFav ?? false,
-                    );
-                    // Reload the favorite page
-                    await _favoriteListCubit.getFavoriteList();
-                  },
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    transitionBuilder: (child, animation) {
-                      return ScaleTransition(
-                        scale: animation.drive(Tween<double>(
-                          begin: 1.5,
-                          end: 1,
-                        )),
-                        child: FadeTransition(opacity: animation, child: child),
-                      );
-                    },
-                    child: (state.isFav ?? false)
-                        ? const Icon(
-                            Icons.favorite,
-                            key: ValueKey(1),
-                            color: AppColors.ORANGE_FE7455,
-                            size: 35,
-                          )
-                        : const Icon(
-                            Icons.favorite_outline,
-                            key: ValueKey(2),
-                            color: AppColors.WHITE,
-                            size: 35,
-                          ),
-                  ),
-                ),
-              );
-            },
-          ),
+          _getFavoriteButton(context),
         ],
       ),
+    );
+  }
+
+  Widget _getFavoriteButton(BuildContext context) {
+    return BlocBuilder<RecipeDataCubit, RecipeDataState>(
+      bloc: _recipeDataCubit,
+      builder: (context, state) {
+        return Positioned(
+          top: 5,
+          right: 10,
+          child: GestureDetector(
+            onTap: () async {
+              await _recipeDataCubit.changeFav(
+                widget._recipe,
+                state.recipe?.isFav ?? false,
+              );
+              await _favoriteListCubit.getFavoriteList();
+            },
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(
+                  scale: animation.drive(Tween<double>(
+                    begin: 1.5,
+                    end: 1,
+                  )),
+                  child: FadeTransition(opacity: animation, child: child),
+                );
+              },
+              child: (state.recipe?.isFav ?? false)
+                  ? const Icon(
+                      Icons.favorite,
+                      key: ValueKey(1),
+                      color: AppColors.ORANGE_FE7455,
+                      size: 35,
+                    )
+                  : const Icon(
+                      Icons.favorite_outline,
+                      key: ValueKey(2),
+                      color: AppColors.WHITE,
+                      size: 35,
+                    ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

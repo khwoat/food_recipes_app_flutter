@@ -5,7 +5,7 @@ import 'package:food_recipes_flutter/constants/text_style.dart';
 import 'package:food_recipes_flutter/widgets/recipe_card.dart';
 import '../cubit/dropdown/dropdown_cubit.dart';
 import '../cubit/recipe_list/recipe_list_cubit.dart';
-import '../model/recipe.dart';
+import '../model/recipe_model.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -88,16 +88,16 @@ class _DashboardPageState extends State<DashboardPage> {
             Expanded(
               child: BlocBuilder<RecipeListCubit, RecipeListState>(
                 bloc: _recipesCubit,
-                builder: (context, state) {
+                builder: (context, recipeState) {
                   return GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisExtent: 220,
                     ),
-                    itemCount: state.recipeList.length,
+                    itemCount: recipeState.recipeList.length,
                     itemBuilder: (context, index) {
-                      final Recipe recipe = state.recipeList[index];
+                      final Recipe recipe = recipeState.recipeList[index];
                       return RecipeCard(recipe: recipe);
                     },
                   );

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:food_recipes_flutter/constants/string.dart';
-import 'package:food_recipes_flutter/model/user_data.dart';
+import 'package:food_recipes_flutter/model/user_data_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
