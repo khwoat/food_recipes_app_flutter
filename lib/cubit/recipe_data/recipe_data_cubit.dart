@@ -21,10 +21,10 @@ class RecipeDataCubit extends Cubit<RecipeDataState> {
   }
 
   Future<void> changeFav(Recipe recipe, bool isFav) async {
-    emit(RecipeDataLoading());
+    // emit(RecipeDataLoading());
     final newIsFav = !isFav;
     await recipeRepository.changeFav(recipe, newIsFav);
-    emit(RecipeDataSuccess(
+    emit(RecipeDataAction(
       recipe: Recipe.fromJson({
         ...recipe.toJson(),
         "isFav": newIsFav,

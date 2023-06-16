@@ -13,6 +13,10 @@ class RecipeDataInitial extends RecipeDataState {}
 
 class RecipeDataLoading extends RecipeDataState {}
 
+class RecipeDataAction extends RecipeDataState {
+  const RecipeDataAction({required super.recipe});
+}
+
 class RecipeDataSuccess extends RecipeDataState {
   const RecipeDataSuccess({required super.recipe});
 }

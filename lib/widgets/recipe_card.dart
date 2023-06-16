@@ -99,6 +99,11 @@ class _RecipeCardState extends State<RecipeCard> {
     return BlocBuilder<RecipeDataCubit, RecipeDataState>(
       bloc: _recipeDataCubit,
       builder: (context, state) {
+        if (state is RecipeDataLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return Positioned(
           top: 5,
           right: 10,
